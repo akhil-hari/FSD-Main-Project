@@ -1,0 +1,15 @@
+{
+  "name": "hydoc",
+  "version": "0.0.1",
+  "description": "Doctor appointment mangement System",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Akhil H,Shabla M,Anija J",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.13.2"
+  }
+}
