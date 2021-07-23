@@ -1,6 +1,10 @@
 const express=require('express');
 const doctorModel=require('../models/doctorData');
+const { list_doctors }=require('../controller/general');
+
+
 const apiRouter=new express.Router();
+
 
 
    apiRouter.get('/add_doctor',async (req,res)=>{
@@ -28,15 +32,7 @@ const apiRouter=new express.Router();
    });
 
    apiRouter.get('/list_doctors',async (req,res)=>{
-      let data=await doctorModel.find().catch((err)=>{console.log(`${err}:Database Connection Failed.!!`)});
-   
-   
-      
-
-      
-
-
-      res.json(data);
+       res.json(await list_doctors());
   
    });
 
