@@ -7,18 +7,13 @@ const localURL='mongodb://127.0.0.1:27017/WebApp?compressors=zlib&gssapiServiceN
 
 mongoose.connect(localURL,{useNewUrlParser: true,useUnifiedTopology: true}).catch(err=>{console.log(`${err} : Database connection failed.!!`)});
 
-let doctorSchema=mongoose.Schema({
-
-    name:String, 
-    speciality:String,
-    currentHospital:mongoose.Schema.Types.Mixed,
-    hospitalRecord:[mongoose.Schema.Types.Mixed],
-    contact:String,
-    // timing:[mongoose.Schema.Types.Mixed]
-    
-
+let doctorSchedule=mongoose.Schema({
+        doctor:mongoose.Schema.Types.ObjectId,
+        type:String,
+        schedule:[mongoose.Schema.Types.Mixed],
+        timestamp:Date
 
 });
-let doctorModel=mongoose.model('doctorData',doctorSchema);
 
-module.exports=doctorModel;
+dScheduleModel=mongoose.model('doctorSchedule',doctorSchedule);
+module.exports=dScheduleModel;
