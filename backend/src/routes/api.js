@@ -1,6 +1,7 @@
 const express=require('express');
 const doctorModel=require('../models/doctorData');
 const { list_doctors }=require('../controller/general');
+const ObjectId=require('mongoose').Types.ObjectId;
 
 
 const apiRouter=new express.Router();
@@ -10,11 +11,11 @@ const apiRouter=new express.Router();
    apiRouter.get('/add_doctor',async (req,res)=>{
      let item= 
       {
-      name:'Doctor4', 
+      name:'Doctor5', 
       speciality:'oncologist',
-      currentHospital:'PHC pathiyoor',
-      hospitalRecord:['THQH Kayamkulam','APPOLO'],
-      contact:'+918567899772'
+      currentHospital:new ObjectId('60fd2299dff20e3837410371'),
+      hospitalRecord:['THQH Mavelikara','APPOLO'],
+      contact:'+918546798924'
       // timing:[
       //    {
       //       start:{hr:11,min:30},

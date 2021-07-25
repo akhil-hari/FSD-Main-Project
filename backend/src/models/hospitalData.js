@@ -9,13 +9,13 @@ mongoose.connect(cloudURL,{useNewUrlParser: true,useUnifiedTopology: true}).catc
 
 let hospitalSchema=mongoose.Schema({
     name:String,
-    Type:String, 
+    type:String, 
     speciality:String,
     hospitalDescription:String,
     //hospitalRecord:[String],
-    address:String,
+    address:mongoose.Schema.Types.Mixed,
     contact:String,
-    position:[mongoose.Schema.Types.Mixed]
+    position:mongoose.Schema.Types.Mixed
     
 
 
