@@ -1,5 +1,7 @@
 const express=require('express');
 const doctorModel=require('../models/doctorData');
+const userModel=require('../models/userData');
+const ratingModel=require('../models/ratingData');
 const { list_doctors }=require('../controller/general');
 const ObjectId=require('mongoose').Types.ObjectId;
 
@@ -36,6 +38,31 @@ const apiRouter=new express.Router();
        res.json(await list_doctors());
   
    });
+   apiRouter.get('/add_user',async (req,res)=>{
+      let item={
+         name: 'User3',
+         age: 38,
+         phone: '+919573894120',
+      }
+      let  data=userModel(item)
+      await data.save().then(result=>{res.send(`<h1 style="color:cornflowerblue">${result} Created in userdatas</h1>`)}).catch(err=>{res.send(`<h1 style="color:tomato"> ${err} Failed</h1>`)})
+
+
+   });
+
+   apiRouter.get('/add_rating',async (req,res)=>{
+      item={
+         doctor:ObjectId('60f19de2dff78773927ffafe'),
+         user:ObjectId('60fd787dc8f84f2f5af9ade3'),
+         rating:1,
+         review:'blah baolg blah not good service....',
+         created:Date.now(),
+         Updated:Date.now()
+      }
+      let  data=ratingModel(item)
+      await data.save().then(result=>{res.send(`<h1 style="color:cornflowerblue">${result} Created in ratingdatas</h1>`)}).catch(err=>{res.send(`<h1 style="color:tomato"> ${err} Failed</h1>`)})
+
+   })
 
   
    
