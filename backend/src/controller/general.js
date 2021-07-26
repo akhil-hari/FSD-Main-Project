@@ -3,12 +3,19 @@ const hospitalModel=require('../models/hospitalData');
 const ratingModel=require('../models/ratingData');
 
 async function list_doctors(){
-    let doctorId;
-    let data;
-    await doctorModel.find().then(result=>{doctorId=result[0]._id;data=result}).catch((err)=>{console.log(`${err}:Database Connection Failed while listing doctors.!!`)});
-    let rating=await ratingModel.find({doctor:doctorId}).then().catch(err=>{console.log(`${err}:Database Connection`)})
+    
+    // let data=[];
+    let doctors= await doctorModel.find().catch((err)=>{console.log(`${err}:Database Connection Failed while listing doctors.!!`)});
+    let data=await doctors.map(async item=>{
+        let doctorId=item._id;
+        let rating=await ratingModel.find({doctor:doctorId}).catch(err=>{rating=[]});
+         return {item,rating};
+    })
+    
+    // console.log(data);
     // console.log(doctorId)
-    return {data,rating};
+    return await Promise.all(data);
+
 
 
 }
