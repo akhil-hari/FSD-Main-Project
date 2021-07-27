@@ -2,37 +2,48 @@
     margin: 0;
     padding: 0;
  }
-.header{
-    text-align: center;
-}
+
 .wrapper{
-    width: 1170px;
-    margin: 0 auto;
+    /* width: 1170px; */
+    display:inline;
+    width:100%;
+    /* margin: 0 auto; */
 }
-header{
+#header{
     height: 100px;
+    /* text-align: center; */
     background: #262626;
     width: 100%;
     z-index: 12;
-    position: fixed;
+    position: sticky;
+    top:0;
 }
 .logo{
-    width: 30%;
+    text-align: left;
+    width: fit-content;
+    margin-left:20px;
     float: left;
     line-height: 100px;
 }
 .logo a{
+    text-align: left;
     text-decoration: none;
     font-size: 30px;
     font-family: bignoodletitling;
     color: #fff;
     letter-spacing: 5px;
 }
-nav{
+#right{
     float: right;
+    display:flex;
+    align-items:center;
+}
+span{
+    /* float: left; */
+    display:inline;
     line-height: 100px;
 }
-nav a{
+span a{
     text-decoration: none;
     font-family: bignoodletitling;
     letter-spacing: 4px;
@@ -40,24 +51,26 @@ nav a{
     margin: 0 10px;
     color: #fff;
 }
-header a:hover
+#header a:hover
 {
     color: royalblue;
 }
-.search-form{
-    /* margin-top: 2px; */
-    float: right;
-    margin-left: 100px;
+#search{
+    display:inline;
+    height:fit-content;
+    /* float:right; */
+    
     padding-top: 2px;
-    margin-bottom: 100%;
 }
-input[type=text]{
+
+#search input[type=text]{
     padding: 7px;
     border: none;
     font-size: 16px;
 }
-button{
-    float: right;
+#search button{
+    /* float: right; */
+    height:100%;
     background: blueviolet;
     color: black;
     border-radius: 0 5px 5px 0;

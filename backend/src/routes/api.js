@@ -2,7 +2,7 @@ const express=require('express');
 const doctorModel=require('../models/doctorData');
 const userModel=require('../models/userData');
 const ratingModel=require('../models/ratingData');
-const { list_doctors }=require('../controller/general');
+const { list_doctors,getDoctor }=require('../controller/general');
 const ObjectId=require('mongoose').Types.ObjectId;
 
 
@@ -35,6 +35,8 @@ const apiRouter=new express.Router();
    });
 
    apiRouter.get('/list_doctors',async (req,res)=>{
+         console.log('apiRouter')
+         console.log(await getDoctor('60f19de2dff78773927ffafe'))
        res.json(await list_doctors());
   
    });
