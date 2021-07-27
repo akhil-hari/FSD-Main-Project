@@ -24,7 +24,7 @@ async function getDoctor(id){
 ]).catch(err=>{console.log(`${err}: aggregation failed`)})
 //console.log(userRating)    
 
-     let data=await {doctor:doctor,userRatings:userRating};
+     let data=await {doctor:doctor,userRatings:userRating[0]};
      
     
     // console.log(data);
