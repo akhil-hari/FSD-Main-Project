@@ -40,6 +40,11 @@ const apiRouter=new express.Router();
        res.json(await list_doctors());
   
    });
+   apiRouter.get('/doctor/:id',async (req,res)=>{
+      doctorId=req.params.id;
+      data=await getDoctor(doctorId);
+      res.json(data);
+   });
    apiRouter.get('/add_user',async (req,res)=>{
       let item={
          name: 'User3',

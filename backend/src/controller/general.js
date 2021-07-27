@@ -24,8 +24,8 @@ async function getDoctor(id){
 ]).catch(err=>{console.log(`${err}: aggregation failed`)})
 //console.log(userRating)    
 
-     let data=await {doctor:doctor,userRatings:Promise.all(userRating)};
-     console.log(data)
+     let data=await {doctor:doctor,userRatings:userRating};
+     
     
     // console.log(data);
     // console.log(doctorId)
