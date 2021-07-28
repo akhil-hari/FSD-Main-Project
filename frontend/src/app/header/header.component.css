@@ -1,6 +1,7 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
  }
 
 .wrapper{
@@ -11,6 +12,7 @@
 }
 #header{
     height: 100px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     /* text-align: center; */
     background: #262626;
     width: 100%;
@@ -29,7 +31,7 @@
     text-align: left;
     text-decoration: none;
     font-size: 30px;
-    font-family: bignoodletitling;
+    /* font-family: bignoodletitling; */
     color: #fff;
     letter-spacing: 5px;
 }
@@ -45,11 +47,15 @@ span{
 }
 span a{
     text-decoration: none;
-    font-family: bignoodletitling;
+    
+    /* font-family: bignoodletitling; */
     letter-spacing: 4px;
-    font-size: 20px;
+    font-size: 14px;
     margin: 0 10px;
     color: #fff;
+}
+span a:hover{
+    background-color: wheat;
 }
 #header a:hover
 {
@@ -58,26 +64,38 @@ span a{
 #search{
     display:inline;
     height:fit-content;
+    background-color: white;
+    overflow: hidden;
+    border-radius: 0 5px 5px 0;
+    margin-right: 10px;
     /* float:right; */
     
-    padding-top: 2px;
+    /* padding-top: 2px; */
 }
 
 #search input[type=text]{
-    padding: 7px;
+    padding-left: 7px;
+    
     border: none;
-    font-size: 16px;
+    height:100%;
+    font-size: 10px;
+}
+#search input[type=text]:focus{
+    outline:none;
 }
 #search button{
     /* float: right; */
     height:100%;
     background: blueviolet;
-    color: black;
-    border-radius: 0 5px 5px 0;
+    color: white;
+    
     cursor: pointer;
     position: relative;
     padding:7px;
-    font-family: bignoodletitling;
+    /* font-family: bignoodletitling; */
     border: none;
-    font-size: 16px;
+    font-size: 10px;
+}
+#search button:active{
+    background-color:rgb(38, 23, 53);
 }
