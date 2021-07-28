@@ -36,7 +36,7 @@ const apiRouter=new express.Router();
 
    apiRouter.get('/list_doctors',async (req,res)=>{
          console.log('apiRouter')
-         console.log(await getDoctor('60f19de2dff78773927ffafe'))
+         //console.log(await getDoctor('60f19de2dff78773927ffafe'))
        res.json(await list_doctors());
   
    });

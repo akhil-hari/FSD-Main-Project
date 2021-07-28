@@ -35,7 +35,7 @@ async function getDoctor(id){
 
 async function list_doctors(){
     
-    // let data=[];
+    // A function to retreve a list of doctors 
     let doctors= await doctorModel.find().catch((err)=>{console.log(`${err}:Database Connection Failed while listing doctors.!!`)});
     let data=await doctors.map(async item=>{
         let doctorId=item._id;
@@ -51,9 +51,7 @@ async function list_doctors(){
                 avgRating:{
                     $avg:'$rating'
                 },
-                reviews:{
-                    $push:{user:'$user',review:'$review',rating:'$rating'}
-                }
+                
             }
         }
     ]).catch(err=>{console.log(`${err}: aggregation failed`)})
