@@ -2,7 +2,7 @@ const express=require('express');
 const doctorModel=require('../models/doctorData');
 const userModel=require('../models/userData');
 const ratingModel=require('../models/ratingData');
-const { list_doctors,getDoctor }=require('../controller/general');
+const { list_doctors,getDoctor,getHospital }=require('../controller/general');
 const ObjectId=require('mongoose').Types.ObjectId;
 
 
@@ -41,10 +41,18 @@ const apiRouter=new express.Router();
   
    });
    apiRouter.get('/doctor/:id',async (req,res)=>{
-      doctorId=req.params.id;
-      data=await getDoctor(doctorId);
+      let doctorId=req.params.id;
+      let data=await getDoctor(doctorId);
       res.json(data);
    });
+   
+   
+   apiRouter.get('/hospital/:id',async (req,res)=>{
+      let data=await getHospital(req.params.id);
+      res.json(data[0]);
+   })
+
+
    apiRouter.get('/add_user',async (req,res)=>{
       let item={
          name: 'User3',
