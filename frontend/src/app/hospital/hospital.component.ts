@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DoctorService } from '../doctor.service'
+
 
 
 
@@ -9,16 +9,10 @@ import { DoctorService } from '../doctor.service'
   styleUrls: ['./hospital.component.css']
 })
 export class HospitalComponent implements OnInit {
-  x:any;
-  constructor(private ds:DoctorService) { }
-  async getDoctors():Promise<any>{
-    await this.ds.getDoctors().subscribe((doctors:any)=>{
-      this.x=doctors;
-      console.log(this.x);
-
-  });
-}
-
+  
+  
+  constructor() { }
+ 
   ngOnInit(): void {
    
     }

@@ -54,9 +54,7 @@ span a{
     margin: 0 10px;
     color: #fff;
 }
-span a:hover{
-    background-color: wheat;
-}
+
 #header a:hover
 {
     color: royalblue;
