@@ -1,0 +1,10 @@
+<div *ngIf="mode=='set'" class="star-ratings-css">
+    <div class="star-ratings-css-top" [style.width]="rating+'%'"><span (mouseover)="rate(20)" (click)="rateConfirm()" (mouseleave)="leave()">★</span><span (mouseover)="rate(40)" (click)="rateConfirm()" (mouseleave)="leave()">★</span><span (mouseover)="rate(60)" (click)="rateConfirm()" (mouseleave)="leave()">★</span><span (mouseover)="rate(80)" (click)="rateConfirm()" (mouseleave)="leave()">★</span><span (mouseover)="rate(100)" (click)="rateConfirm()" (mouseleave)="leave()">★</span></div>
+    <div class="star-ratings-css-bottom"><span (mouseover)="rate(20)" (click)="rateConfirm()" (mouseleave)="leave()">★</span><span (mouseover)="rate(40)" (click)="rateConfirm()" (mouseleave)="leave()">★</span><span (mouseover)="rate(60)" (click)="rateConfirm()" (mouseleave)="leave()">★</span><span (mouseover)="rate(80)" (click)="rateConfirm()" (mouseleave)="leave()">★</span><span (mouseover)="rate(100)" (click)="rateConfirm()" (mouseleave)="leave()">★</span></div>
+  </div>
+
+  <div *ngIf="mode=='get'" class="star-ratings-css">
+    <div class="star-ratings-css-top" [style.width]="rating+'%'"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+    <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+  </div>
+  <!-- {{rating}} -->
