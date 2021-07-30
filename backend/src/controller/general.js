@@ -73,6 +73,10 @@ async function add_hospital(){
     
     
 }
+async function getHospital(id){
+    data=await hospitalModel.findOne({_id:ObjectId(id)}).catch(err=>{console.log(`${err}: can't get from Hospital data`)})
+    return Promise.all([data])
+}
 module.exports={
-    list_doctors,getDoctor
+    list_doctors,getDoctor,getHospital
 }
