@@ -1,3 +1,6 @@
+*{
+  word-wrap:normal;
+}
 .star-ratings-css {
     unicode-bidi: bidi-override;
     user-select:none;
@@ -17,7 +20,7 @@
     padding: 0;
     position: absolute;
     z-index: 1;
-    display: block;
+    display: inline;
     top: 0;
     left: 0;
     overflow: hidden;
@@ -25,7 +28,7 @@
 
   .star-ratings-css-bottom {
     padding: 0;
-    display: block;
+    display: inline;
     z-index: 0;
   }
  

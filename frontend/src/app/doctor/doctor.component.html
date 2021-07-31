@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="doctor.component.css">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <div class="container">
+   
     <div class="main-body">
         <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
@@ -10,14 +11,18 @@
                     <div class="d-flex flex-column align-items-center text-center">
                     <img src="https://pbs.twimg.com/media/C8LVNcZVYAIBtLc.jpg" class="rounded-circle" width="150">
                     <div class="mt-3">
-                      <h4>Dr. Mikhael Varshavski</h4>
-                      <p class="text-secondary mb-1">Family physician</p>
-                      <p class="text-secondary mb-1"><i style='font-size:15px; color: red;' class="fa">&#xf0f8;</i> Chatham Family Medicine</p>
-                      <p class="text-muted font-size-sm"><i style="font-size:15px; color: red;" class="fa">&#xf041;</i> New Jersey</p>
-                      <button class="btn btn-primary">Follow</button>&#160;
-                      <button class="btn btn-outline-primary">Message</button>
+                      <h4>{{doctor.name}}</h4>
+                      <p class="text-secondary mb-1">{{doctor.speciality}}</p>
+                      <p class="text-secondary mb-1"><i style='font-size:15px; color: red;' class="fa">&#xf0f8;</i> {{doctor.currentHospital}}</p>
+                      
+                      <!-- <p class="text-muted font-size-sm"><i style="font-size:15px; color: red;" class="fa">&#xf041;</i> New Jersey</p> -->
+                      <!-- <button class="btn btn-primary">Follow</button>&#160; -->
+                      <!-- <button class="btn btn-outline-primary">Message</button> -->
                     </div>
                     </div>
+                    <div>
+                        
+                      </div>
                 </div>
                 </div>
             </div>
@@ -43,10 +48,24 @@
                                                     <label>Experience</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <p>5 years</p>
+                                                    <p>{{doctor.experience}}</p>
                                                 </div>
                                             </div>
-                                            <div class="row">
+
+                                            
+                                            <div *ngIf="rating" class="row">
+                                                <div class="col-md-6">
+                                                    <label>Rating</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div style="display:inline-block;color:#0062cc;margin-left:150px;margin-top:10px;margin-bottom:10px;"> <ratings  [rating]="rating"></ratings>({{rating/20}})</div>
+                                                   
+                                                </div>
+                                            </div>
+
+
+
+                                            <div *ngIf="doctor.awards" class="row">
                                                 <div class="col-md-6">
                                                     <label>Awards and recognitions</label>
                                                 </div>
@@ -54,12 +73,12 @@
                                                     <p> 2020 Webby Awards for Health & Fitness</p>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div *ngIf="doctor.address" class="row">
                                                 <div class="col-md-6">
                                                     <label>Address</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <p>492 Main St, Chatham, NJ 07928, United States</p>
+                                                    <p>doctor.address</p>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -67,7 +86,7 @@
                                                     <label>Email</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <p><a href="#">Doctor.mike@mail.com</a></p>
+                                                    <p><a href="#">{{doctor.email}}</a></p>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -75,7 +94,7 @@
                                                     <label>Phone</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <p><a href="#">+1 973-635-2432</a></p>
+                                                    <p><a href="#">{{doctor.phone}}</a></p>
                                                 </div>
                                             </div>
                                             
@@ -107,7 +126,7 @@
                                             </div>                                            
                                 </div>
                             </div>
-                        <button class="button">Book Appointment</button>
+                        <button class="button" (click)='f()'>Book Appointment</button>
                     </div>               
                     
                 </div>
