@@ -68,6 +68,11 @@ async function list_doctors(){
 
 }
 
+async function search(query){
+    result=doctorModel.find({$or:[{name:{$regex:query}},{currentHospital:{$regex:query}}]}).catch(err=>{console.log(`${err} :Search Failed!`)});
+    return Promise.all([result]);
+}
+
 async function add_hospital(){
     
     
@@ -78,5 +83,5 @@ async function getHospital(id){
     return Promise.all([data])
 }
 module.exports={
-    list_doctors,getDoctor,getHospital
+    list_doctors,getDoctor,getHospital,search
 }
