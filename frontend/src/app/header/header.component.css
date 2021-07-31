@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 *{
     margin: 0;
     padding: 0;
@@ -69,7 +68,6 @@ button{
     border: none;
     font-size: 16px;
 }
-=======
 *{
     margin: 0;
     padding: 0;
@@ -169,4 +167,3 @@ span a{
 #search button:active{
     background-color:rgb(38, 23, 53);
 }
->>>>>>> 6da476dcd0202ce4e4d6778bb4a3f7cadc1ef0af

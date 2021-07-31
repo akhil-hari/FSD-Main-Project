@@ -15,4 +15,8 @@ export class DoctorService {
     return this.doctors;
 
   }
+  getDoctor(id_string: string){
+    let doctor=this.http.get(this.baseUrl+'api/doctor/'+id_string);
+    return doctor;
+  }
 }
