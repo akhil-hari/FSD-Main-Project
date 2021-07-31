@@ -1,0 +1,58 @@
+<link rel="stylesheet" href="signup.component.css">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<div class="container">
+<div class="signup">
+    <h3 style="font-weight: bold;">Not a Member?<br>Signup Here</h3>
+    <br>
+    <form id="SignUp">
+        <div class="form-group fieldDiv" style="margin-bottom: 0px;">
+        <br>
+            <label for="firstName"></label>
+            <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
+        </div>
+        <div class="form-group fieldDiv" style="margin-bottom: 0px;">
+            <label for="lastName"></label>
+            <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+        </div>
+        <div class="form-group fieldDiv" style="margin-bottom: 0px;">
+            <label for="address"></label>
+            <input type="text" class="form-control" id="address" placeholder="Address" required>
+        </div>
+        <div class="form-group fieldDiv" style="margin-bottom: 0px;">
+            <label for="phoneNumber"></label>
+            <input type="tel" class="form-control" id="phoneNumber" placeholder="Phone Number" required>
+        </div><br>
+        <div class="gender">
+            <input type="radio" id="female" name="gender">
+            <label for="female">&nbsp;&nbsp;Female</label><br>
+            <input type="radio" id="male" name="gender">
+            <label for="male">&nbsp;&nbsp;Male</label><br>  
+            <input type="radio" id="transgender" name="gender">
+            <label for="transgender">&nbsp;&nbsp;Transgender</label><br>
+            <input type="radio" id="others" name="gender">
+            <label for="others">&nbsp;&nbsp;Others</label><br>
+        </div>
+        <div class="form-group fieldDiv" style="margin-bottom: 0px;">
+            <label for="Email"></label>
+            <input type="email" class="form-control" id="Email" placeholder="E-mail" required>
+        </div>
+        <div class="form-group fieldDiv" style="margin-bottom: 0px;">
+          <label for="passWord"></label>
+          <input type="password" class="form-control" id="passWord" placeholder="Password" required>
+        </div>
+        <div class="form-group fieldDiv">
+            <label for="ConformpassWord"></label>
+            <input type="password" class="form-control" placeholder="Conform Password" id="ConformpassWord" required>
+        </div>
+        <br>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input">
+            <label class="form-check-label">I accept the<a href="#">Terms of Use</a> & <a href="#">Privacy Policy</a></label>
+        </div>
+        <button type="submit" class="btn btn-primary buttonGroup" style="margin-bottom:15px;" id="loginBtn">Sign Up</button>
+        <br>
+        <h6>Already have an account? <a href="#" style="color: green;"> Login here</a></h6> 
+            
+    </form>
+</div>
+</div>
