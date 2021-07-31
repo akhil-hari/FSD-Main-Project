@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { BodyComponent } from './body/body.component';
 import { HospitalComponent } from './hospital/hospital.component';
 import { RatingsComponent } from './ratings/ratings.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { RatingsComponent } from './ratings/ratings.component';
     FooterComponent,
     BodyComponent,
     HospitalComponent,
-    RatingsComponent
+    RatingsComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
