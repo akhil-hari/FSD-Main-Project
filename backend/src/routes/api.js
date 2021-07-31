@@ -13,11 +13,12 @@ const apiRouter=new express.Router();
    apiRouter.get('/add_doctor',async (req,res)=>{
      let item= 
       {
-      name:'Doctor5', 
+      name:'Doctor1', 
       speciality:'oncologist',
-      currentHospital:new ObjectId('60fd2299dff20e3837410371'),
-      hospitalRecord:['THQH Mavelikara','APPOLO'],
-      contact:'+918546798924'
+      currentHospital:'hospital3',
+      experience:'10 years',
+      phone:'+918546798924',
+      email:'doctor1@hospital3.com'
       // timing:[
       //    {
       //       start:{hr:11,min:30},

@@ -11,9 +11,11 @@ let doctorSchema=mongoose.Schema({
 
     name:String, 
     speciality:String,
-    currentHospital:mongoose.Schema.Types.Mixed,
-    hospitalRecord:[mongoose.Schema.Types.Mixed],
+    currentHospital:String,
+    experience:String,
+    awards:String,
     phone:String,
+    email:String,
     
     // timing:[mongoose.Schema.Types.Mixed]
     
