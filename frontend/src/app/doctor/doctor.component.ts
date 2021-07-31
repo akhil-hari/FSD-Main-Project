@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DoctorService } from '../doctor.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -9,18 +10,25 @@ import { DoctorService } from '../doctor.service';
 })
 export class DoctorComponent implements OnInit {
 
-  constructor(private ds:DoctorService) { }
+  constructor(private ds:DoctorService,private route: ActivatedRoute) { }
   doctor:any={};
   ratingObj:any={};
   rating:number=0;
 
   ngOnInit(): void {
-    this.ds.getDoctor('60f19de2dff78773927ffafe').subscribe(doctor=>{
+    let id=this.route.snapshot.paramMap.get('id');
+    console.log(id);
+    if(id){
+    this.ds.getDoctor(id).subscribe(doctor=>{
       this.doctor=doctor;
+      if(this.doctor.userRatings){
       this.ratingObj=this.doctor.userRatings;
       this.rating=(this.doctor.userRatings.avgRating*20-(this.doctor.userRatings.avgRating*20)%1)|0
+      }
+      
       this.doctor=this.doctor.doctor;
     });
+      }
     
 
   }
