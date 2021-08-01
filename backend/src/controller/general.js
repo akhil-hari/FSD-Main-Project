@@ -69,7 +69,7 @@ async function list_doctors(){
 }
 
 async function search(query){
-    result=doctorModel.find({$or:[{name:{$regex:query}},{currentHospital:{$regex:query}}]}).catch(err=>{console.log(`${err} :Search Failed!`)});
+    result=doctorModel.find({$or:[{name:{$regex:query,$options:'i'}},{currentHospital:{$regex:query,$options:'i'}}]}).catch(err=>{console.log(`${err} :Search Failed!`)});
     return Promise.all([result]);
 }
 
