@@ -10,10 +10,10 @@ mongoose.connect(cloudURL,{useNewUrlParser: true,useUnifiedTopology: true}).catc
 let userSchedule=mongoose.Schema({
     user:mongoose.Schema.Types.ObjectId,
     doctor:mongoose.Schema.Types.ObjectId,
-    status:String,
-    schedule:Date,
-    remark:[mongoose.Schema.Types.Mixed],
-    timestamp:Date,
+    status:String,  //pending.onfirmed,visited,rejcted
+    schedule:Date, //shedule date
+    remark:[mongoose.Schema.Types.Mixed], //could be used as priscription
+    timestamp:Date,// date where the booking was made
 });
 uScheduleModel=mongoose.model('userSchedule',userSchedule);
 module.exports=uScheduleModel;
