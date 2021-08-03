@@ -5,7 +5,7 @@ const localURL='mongodb://127.0.0.1:27017/WebApp?compressors=zlib&gssapiServiceN
 
 
 
-mongoose.connect(cloudURL,{useNewUrlParser: true,useUnifiedTopology: true}).catch(err=>{console.log(`${err} : Database connection failed.!!`)});
+mongoose.connect(cloudURL,{useNewUrlParser: true,useUnifiedTopology: true,reconnectTries}).catch(err=>{console.log(`${err} : Database connection failed.!!`)});
 
 let authSchema=mongoose.Schema({
 
