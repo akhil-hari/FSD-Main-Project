@@ -112,8 +112,8 @@ const apiRouter=new express.Router();
    }
 
    async function getuserSchedule(id){
-   data=await userSchedule.findOne({_id:ObjectId(id)}).catch(err=>{console.log(`${err}: can't get from userSchedule data`)})
-   return Promise.all([data])
+      data=await userSchedule.findOne({_id:ObjectId(id)}).catch(err=>{console.log(`${err}: can't get from userSchedule data`)})
+      return Promise.all([data])
    }
 
    module.exports={
