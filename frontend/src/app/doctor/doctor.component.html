@@ -35,15 +35,15 @@
                     <div class="d-flex flex-column align-items-center text-center">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#about" >About</a>
+                            <a class="nav-link" [ngClass]="{'active':tab==='home'}" id="home-tab" (click)="tab='home'">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#appoint">Appointment</a>
+                            <a class="nav-link" [ngClass]="{'active':tab==='profile'}" id="profile-tab"  (click)="tab='profile'">Appointment</a>
                         </li>
                     </ul></div>
                     <div class="col-md-8">
                             <div class="tab-content profile-tab" id="myTabContent">
-                                <div class="tab-pane fade show active" id="about">
+                                <div class="tab-pane fade" [ngClass]="{'show active':tab==='home'}" id="about">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label>Experience</label>
@@ -95,12 +95,12 @@
                                                     <label>Phone</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <p><a href="#">{{doctor.phone}}</a></p>
+                                                    <p><a >{{doctor.phone}}</a></p>
                                                 </div>
                                             </div>
                                             
                                 </div>
-                                <div class="tab-pane fade" id="appoint" >
+                                <div class="tab-pane fade" [ngClass]="{'show active':tab==='profile'}" id="appoint" >
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label>Availability</label>
@@ -127,7 +127,7 @@
                                             </div>                                            
                                 </div>
                             </div>
-                        <button class="button" (click)='f()'>Book Appointment</button>
+                        <button class="button" >Book Appointment</button>
                     </div>               
                     
                 </div>

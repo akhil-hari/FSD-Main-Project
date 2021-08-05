@@ -14,8 +14,10 @@ export class DoctorComponent implements OnInit {
   doctor:any={};
   ratingObj:any={};
   rating:number=0;
+  tab:string='home';
 
   ngOnInit(): void {
+    this.tab='home';
     let id=this.route.snapshot.paramMap.get('id');
     console.log(id);
     if(id){
