@@ -84,18 +84,14 @@ public getMonthGrid(d:Date=this.sampleDate):Array<any>{
         let s=(i+b)%35;
         monthGrid[Math.floor(s/7)][s%7]=i+1;
       }
-      console.log(this.months[d.getMonth()])
-      console.log(monthGrid);
-      console.log('--------------------------------');
+     
     return monthGrid;
 }
 public getYearGrid():Array<any>{
     let yearGrid=this.clone(this.yearGrid);
     for(let i=0;i<12;i++){
         yearGrid[i]=this.getMonthGrid(new Date(this.sampleDate.getFullYear(),i,1));
-        // console.log('i='+i);
-        // console.log(this.getMonthGrid(new Date(this.sampleDate.getFullYear(),i,1)))
-        // console.log('\n');
+        
         
     }
     return yearGrid;
