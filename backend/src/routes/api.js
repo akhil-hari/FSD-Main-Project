@@ -87,7 +87,6 @@ const apiRouter=new express.Router();
    })
 
   
-const apiRouter=new doctorSchedule.Router();
    apiRouter.get('/doctor_Schedule',async (req,res)=>{
       let item={
          doctor:ObjectId('60f19de2dff78773927ffafe'),
@@ -99,7 +98,6 @@ const apiRouter=new doctorSchedule.Router();
       await data.save().then(result=>{res.send(`<h1 style="color:cornflowerblue">${result} Created in doctorSchedules</h1>`)}).catch(err=>{res.send(`<h1 style="color:tomato"> ${err} Failed</h1>`)})
    });
 
-const apiRouter=new userSchedule.Router();
    apiRouter.get('/user_Schedule',async (req,res)=>{
       let item={
          user:ObjectId(''),
@@ -113,7 +111,19 @@ const apiRouter=new userSchedule.Router();
       await data.save().then(result=>{res.send(`<h1 style="color:cornflowerblue">${result} Created in userSchedules</h1>`)}).catch(err=>{res.send(`<h1 style="color:tomato"> ${err} Failed</h1>`)})
    });   
 
+   async function getdoctorSchedule(id){
+      data=await doctorSchedule.findOne({_id:ObjectId(id)}).catch(err=>{console.log(`${err}: can't get from doctorSchedule data`)})
+      return Promise.all([data])
+   }
 
+   async function getuserSchedule(id){
+      data=await userSchedule.findOne({_id:ObjectId(id)}).catch(err=>{console.log(`${err}: can't get from userSchedule data`)})
+      return Promise.all([data])
+   }
+
+   module.exports={
+     getdoctorSchedule,getuserSchedule
+   }
    
 
 
