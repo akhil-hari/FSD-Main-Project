@@ -82,6 +82,15 @@ async function getHospital(id){
     data=await hospitalModel.findOne({_id:ObjectId(id)}).catch(err=>{console.log(`${err}: can't get from Hospital data`)})
     return Promise.all([data])
 }
+async function getDoctorSchedule(doctor_id,user_id){
+    data=await doctorSchedule.findOne({doctor:ObjectId(id)}).catch(err=>{console.log(`${err}: can't get from doctorSchedule data`)})
+    return Promise.all([data])
+ }
+
+ async function getUserSchedule(doctor_id,user_id){
+    data=await userSchedule.findOne({_id:ObjectId(id)}).catch(err=>{console.log(`${err}: can't get from userSchedule data`)})
+    return Promise.all([data])
+ }
 module.exports={
-    list_doctors,getDoctor,getHospital,search
+    list_doctors,getDoctor,getHospital,search,getdoctorSchedule,getuserSchedule
 }

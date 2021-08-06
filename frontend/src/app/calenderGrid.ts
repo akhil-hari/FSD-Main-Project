@@ -87,10 +87,10 @@ public getMonthGrid(d:Date=this.sampleDate):Array<any>{
      
     return monthGrid;
 }
-public getYearGrid():Array<any>{
+public getYearGrid(year:number=this.sampleDate.getFullYear()):Array<any>{
     let yearGrid=this.clone(this.yearGrid);
     for(let i=0;i<12;i++){
-        yearGrid[i]=this.getMonthGrid(new Date(this.sampleDate.getFullYear(),i,1));
+        yearGrid[i]=this.getMonthGrid(new Date(year,i,1));
         
         
     }
