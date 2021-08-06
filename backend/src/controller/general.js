@@ -83,12 +83,12 @@ async function getHospital(id){
     return Promise.all([data])
 }
 async function getDoctorSchedule(doctor_id,user_id){
-    data=await doctorSchedule.findOne({doctor:ObjectId(id)}).catch(err=>{console.log(`${err}: can't get from doctorSchedule data`)})
+    data=await doctorSchedule.findOne({doctor:ObjectId(doctor_id),user:ObjectId(user_id)}).catch(err=>{console.log(`${err}: can't get from doctorSchedule data`)})
     return Promise.all([data])
  }
 
  async function getUserSchedule(doctor_id,user_id){
-    data=await userSchedule.findOne({_id:ObjectId(id)}).catch(err=>{console.log(`${err}: can't get from userSchedule data`)})
+    data=await userSchedule.findOne({doctor:ObjectId(doctor_id),user:ObjectId(user_id)}).catch(err=>{console.log(`${err}: can't get from userSchedule data`)})
     return Promise.all([data])
  }
 module.exports={
