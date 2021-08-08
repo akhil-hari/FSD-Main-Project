@@ -19,6 +19,6 @@ let authSchema=mongoose.Schema({
 
 
 });
-let doctorModel=mongoose.model('doctorData',doctorSchema);
+let authModel=mongoose.model('authDatas',authSchema);
 
-module.exports=doctorModel;
+module.exports=authModel;
