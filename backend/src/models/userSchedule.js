@@ -10,7 +10,7 @@ mongoose.connect(cloudURL,{useNewUrlParser: true,useUnifiedTopology: true}).catc
 let userSchedule=mongoose.Schema({
     user:mongoose.Schema.Types.ObjectId,
     doctor:mongoose.Schema.Types.ObjectId,
-    status:String,  //pending.confirmed,visited,rejcted
+    status:String,  //pending.confirmed,visited,rejcted,missed
     schedule:Date, //shedule date
     remark:[mongoose.Schema.Types.Mixed], //could be used as priscription
     timestamp:Date,// date where the booking was made

@@ -2,6 +2,7 @@ const doctorModel= require('../models/doctorData');
 const hospitalModel=require('../models/hospitalData');
 const ratingModel=require('../models/ratingData');
 const ObjectId=require('mongoose').Types.ObjectId;
+const userSchedule=require('../models/userSchedule');
 
 async function getDoctor(id){
     let doctor= await doctorModel.findOne({_id:id}).catch((err)=>{console.log(`${err}:Database Connection Failed while listing doctors.!!`)});
@@ -80,8 +81,30 @@ async function add_hospital(){
 }
 async function getHospital(id){
     data=await hospitalModel.findOne({_id:ObjectId(id)}).catch(err=>{console.log(`${err}: can't get from Hospital data`)})
-    return Promise.all([data])
+    // console.log(await Promise.all([data]));
+    return (await Promise.all([data]))[0];
 }
+async function getDoctorSchedule(doctor_id,user_id){
+    data=await doctorSchedule.findOne({doctor:ObjectId(doctor_id),user:ObjectId(user_id)}).catch(err=>{console.log(`${err}: can't get from doctorSchedule data`)})
+    return await Promise.all([data])
+ }
+ async function upcomingDoctorSchedule(doctor_id){
+     data=await userSchedule.find({doctor:doctor_id,schedule:{$gt:new Date()},status:{$in:['confirmed','pending']}}).catch(err=>{console.log(`${err}: can't get upcoming schedules`)});
+     return await Promise.all([data]);
+ }
+
+ async function getUserSchedule(doctor_id,user_id){
+    data=await userSchedule.find({doctor:ObjectId(doctor_id),user:ObjectId(user_id)}).catch(err=>{console.log(`${err}: can't get from userSchedule data`)})
+    return await Promise.all([data])
+ }
 module.exports={
-    list_doctors,getDoctor,getHospital,search
+
+    list_doctors,
+    getDoctor,
+    getHospital,
+    search,
+    getDoctorSchedule,
+    getUserSchedule,
+    upcomingDoctorSchedule
+
 }
