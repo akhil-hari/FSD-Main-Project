@@ -1,0 +1,70 @@
+<!-- <mat-form-field>
+    <input  matInput placeholder="pick a Date" [matDatepicker]="picker">
+<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+<mat-datepicker #picker></mat-datepicker>
+
+</mat-form-field>
+<mat-form-field>
+    <input  [(ngModel)]="time" matInput placeholder="pick a Time" [ngxTimepicker]="tpicker" readonly>
+<ngx-material-timepicker #tpicker></ngx-material-timepicker>
+
+</mat-form-field>
+<button (click)='clickfn()'> Click me</button>
+
+
+
+<input type="file" (change)="fs.uploadFile($event)" >
+<img [attr.src]="fs.fb" alt="" srcset=""> -->
+<div style="border: 1px solid rgb(201, 197, 197);width:408px;box-sizing: content-box;">
+
+
+    <div class="top-panel">
+    
+        <span class="item prev" (click)='prevBtn()'>&#10094;</span>
+        
+        <span class="item detail">{{yearGrid.yearGrid[month].month.name}}<br>
+          <span style="font-size:18px">{{yearGrid.year}}</span>
+        </span>
+
+        <span class="item next" (click)='nextBtn()'>&#10095;</span>
+      
+    </div>
+    
+    
+
+    <table class='grid grid-large'>
+    
+    
+        <thead>
+
+            <td>Su</td>
+            <td>Mo</td>
+            <td>Tu</td>
+            <td>We</td>
+            <td>Th</td>
+            <td>Fr</td>
+            <td>Sa</td>
+            
+        </thead>
+        <tr *ngFor="let i of yearGrid.yearGrid[month].grid">
+            <td *ngFor="let j of i" (click)="dateCreator(year,month,j)"  >
+                <div style="padding:15px;" [ngClass]="{'marked':j.marked}">
+                    <span *ngIf="j.day>0" class="day" [ngClass]="{'sunday':j==i[0]}" >
+                        <div>
+                             <strong>{{j.day}}</strong>
+                             
+                             <div *ngIf='j.marked' style="height:3px;width:20px;background-color:cornflowerblue;"></div>
+                         </div>
+                     </span>
+    
+                </div>
+                
+                
+            </td>
+        </tr>
+        
+    
+    </table>
+    
+
+</div>

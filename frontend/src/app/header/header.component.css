@@ -12,9 +12,9 @@
 header{
     height: 100px;
     background: #262626;
-    width: 100%;
+    /* width: 100%;
     z-index: 12;
-    position: fixed;
+    position: fixed; */
 }
 .logo{
     width: 30%;
@@ -110,12 +110,12 @@ button{
     display:flex;
     align-items:center;
 }
-span{
+#header span{
     /* float: left; */
     display:inline;
     line-height: 100px;
 }
-span a{
+#header span a{
     text-decoration: none;
     
     /* font-family: bignoodletitling; */

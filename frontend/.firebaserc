@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ictk-main": {
+      "hosting": {
+        "frontend": [
+          "ictk-main"
+        ]
+      }
+    }
+  }
+}

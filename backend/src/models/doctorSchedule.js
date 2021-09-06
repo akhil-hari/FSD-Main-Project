@@ -10,7 +10,7 @@ mongoose.connect(cloudURL,{useNewUrlParser: true,useUnifiedTopology: true}).catc
 let doctorSchedule=mongoose.Schema({
         doctor:mongoose.Schema.Types.ObjectId,
         type:String,
-        schedule:[mongoose.Schema.Types.Mixed],
+        schedule:mongoose.Schema.Types.Mixed,
         timestamp:Date
 
 });

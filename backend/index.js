@@ -2,8 +2,10 @@ const express=require('express');
 const cors=require('cors');
 const app=new express();
 const path=require('path');
-const  apiRouter=require('./src/routes/api')
-const adminRouter=require('./src/routes/admin')
+const  apiRouter=require('./src/routes/api');
+const adminRouter=require('./src/routes/admin');
+const authRouter=require('./src/routes/auth');
+let port=8080;
 
 app.set('view engine','ejs')
 app.use(cors());
@@ -13,11 +15,12 @@ app.use(express.json());
 
 
 app.use('/api',apiRouter);
-app.use('/admin',adminRouter)
+app.use('/admin',adminRouter);
+app.use('/auth',authRouter);
 
 
 
-app.listen(8080,()=>{
-	console.log('server running @ 8080');
+app.listen(port,()=>{
+	console.log(`server running @ ${port}`);
 
 })

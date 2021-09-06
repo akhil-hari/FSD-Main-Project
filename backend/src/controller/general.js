@@ -4,6 +4,10 @@ const ratingModel=require('../models/ratingData');
 const ObjectId=require('mongoose').Types.ObjectId;
 const userSchedule=require('../models/userSchedule');
 
+
+
+
+
 async function getDoctor(id){
     let doctor= await doctorModel.findOne({_id:id}).catch((err)=>{console.log(`${err}:Database Connection Failed while listing doctors.!!`)});
     let userRating=await ratingModel.aggregate([
@@ -105,6 +109,6 @@ module.exports={
     search,
     getDoctorSchedule,
     getUserSchedule,
-    upcomingDoctorSchedule
+    // upcomingDoctorSchedule
 
 }

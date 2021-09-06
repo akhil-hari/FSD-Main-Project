@@ -1,12 +1,40 @@
-.main-body {
-    padding: 15px;
+#details{
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    text-align: center;
+    margin:auto;
+    width:100%;
+    height:100%;
+    /* padding:20px; */
+    flex-wrap: nowrap;
+}
+.circle-img{
+    border-radius: 50%;
+    height:150px;
+    width:150px;
 }
 
 
-.card {
+body{
+    margin-top:20px;
+    color: #1a202c;
+    text-align: left;
+    background-color: #a9e6d5;    
+}
+
+.main-body{
+    padding: 15px;
+}
+
+.card{
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+}
+
+.card{
     position: relative;
     display: flex;
-    width: 500px;
+    width: 800px;
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
@@ -14,7 +42,18 @@
     background-clip: border-box;
     border: 0 solid rgba(0,0,0,.125);
     border-radius: .25rem;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+    
+}
+
+.gutters-sm {
+    margin-right: 20%;
+    margin-left: 15%;
 }
 
 .about {
@@ -32,167 +71,204 @@
     
 }
 
-.card-body {
-    flex: 1 1 auto;
-    min-height: 1px;
-    padding: 1rem;
-}
-
-.gutters-sm {
-    margin-right: 8px;
-    margin-left: 8px;
-}
-
-.calendar
-{
-    height:330px;
-    width: 330px;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 0 solid rgba(0,0,0,.125);
-    border-radius: .25rem;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
-}
-
-.profile-head .nav-tabs
-{
+.profile-head .nav-tabs{
     margin-bottom:5%;    
 }
 
-.profile-head .nav-tabs .nav-link
-{
+/* .nav-tabs{
+    display:flex;
+    flex-direction: row;
+    
+} */
+.nav-item{
+
     font-weight:600;
     border: none;
-    width: 500px;
+    /* flex: 0 1 auto; */
+    /* flex: 1 1 0px; */
+    width: 50%;
 }
-.profile-head .nav-tabs .nav-link.active
-{
+.nav-item .active{
     border: none;
     border-bottom:2px solid #0062cc;
 }
 
-.profile-head label
-{
+.profile-head label{
     font-weight: 600;
-    margin-left: 170px;
+    margin-left: 140px;
 }
 
-.profile-head p
-{
+.profile-head p{
     font-weight: 600;
     color: #0062cc;
-    margin-left: 180px;
+    margin-left: 150px;
 }
 
-
-#button 
-{
-    margin-top: 2px;
+.button {
+    margin-left:55%;
     border: none;
-    background-color: rgba(68, 201, 253, 0.849);
-    padding: 2px 5px;
+    background-color: rgba(7, 252, 19, 0.849);
+    font-size: 18px;
+    padding: 10px 25px;
     display: inline-block;
-    border-radius: 5px;
-
+    border-radius: 22px;
+    margin-top: 70px;
+    margin-bottom: 40px;
 }
 
-#button:hover {
+.button:hover {
     background-color: #008CBA;
     color: white;
 }
+.tab-accordian{
+    margin-top:20px;
+    margin-bottom:50px;
+}
 
-#btn 
-{
-    margin-top: 2px;
-    margin-left: 900px;
+#weekly{
+    table-layout: auto;
+    width:100%;
+    
+}
+#weekly tr{
+    height:40px;
+}
+
+#monthly{
+    table-layout: auto;
+    width:100%;
+    
+}
+#monthly tr{
+    height:40px;
+}
+
+.schedule{
+    margin:2px;
+    width:fit-content;
+    display: inline-block;
+
+    background-color:rgb(156, 175, 235);
+    color:rgb(40, 76, 185);
+    border:1px solid rgb(40, 76, 185);
+    padding:5px;
+    border-radius: 20px;
+
+}
+.schedule button{
+    border-radius: 50%;
+    padding: auto;
     border: none;
-    background-color: rgba(68, 201, 253, 0.849);
-    padding: 2px 7px;
+    height:25px;
+    width:25px;
+}
+
+.add-slot{
+    cursor: pointer;
+    margin:2px;
     display: inline-block;
+
+    width:fit-content;
+
+    background-color:rgb(136, 240, 145);
+    color:rgb(11, 71, 16);
+    border:1px solid rgb(11, 71, 16);
+    padding:5px;
+    border-radius: 20px;
+
+}
+
+.add-slot button{
+    border-radius: 50%;
+    padding: auto;
+    color:green;
+    border: none;
+    height:25px;
+    width:25px;
+}
+.add-slot:hover{
+    background-color:rgb(66, 116, 70);
+}
+
+.btn-add{
+    position: relative;
+    left:80%;
+    border:none;
+    color:white;
+    border-radius:30px;
+    background-color:royalblue;
+    padding:5px;
+    height:40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.dropdown{
+    padding:5px;
+    /* color:royalblue; */
+    border:1px solid gray;
     border-radius: 5px;
+    height: 40px;
+    margin: 5px;
 
 }
 
-#btn:hover {
-    background-color: #008CBA;
-    color: white;
+.dropdown:focus{
+
+    /* color:#008CBA; */
+
+    outline:2px solid lightseagreen;
 }
 
-.month 
-{
-    padding: 10px 15px;
-    width: 100%;
-    background: #1ccaa7;
-    text-align: center;
+.dropdown:invalid {
+    border: 2px solid red;
+  }
+
+.picker-input{
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color:lightblue;
+    padding:2px;width: 225px;
+    border-radius:5px;
+    margin:5px;
+    
+}
+.picker-input input{
+
+    height: 40px;
+
 }
 
-ul 
-{
-    list-style-type: none;
+.btn-save{
+
+    padding:5px;
+    padding-left:20px;
+    padding-right:20px;
+    /* color:royalblue; */
+    /* border:1px solid gray; */
+    background-color: green;
+    color:white;
+    border-radius: 5px;
+    height: 40px;
+    margin: 5px;
 }
 
-.month ul 
-{
-    margin: 0;
-    padding: 0;
+.btn-save:disabled{
+    background-color:lightgray;
+    color:black;
 }
-  
-.month ul li 
-{
-    color: white;
-    font-size: 20px;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 2px;
+
+.btn-cancel{
+    padding:5px;
+    padding-left:20px;
+    padding-right:20px;
+    /* color:royalblue; */
+
+    /* border:1px solid gray; */
+    background-color:red;
+    color:white;
+    border-radius: 5px;
+    height: 40px;
+    margin: 5px;
 }
-  
-.month .prev 
-{
-    float: left;
-    padding-top: 10px;
-    padding-left: 10px;
-}
-  
-.month .next 
-{
-    float: right;
-    padding-top: 10px;
-    padding-right: 10px;
-}
-  
-.weekdays 
-{
-    margin: 0;
-    padding: 12px 0;
-    background-color: #ddd;
-}
-  
-.weekdays li 
-{
-    display: inline-block;
-    width: 12%;
-    color: #666;
-    text-align: center;
-    margin-left: 2px;
-}
-  
-.days 
-{
-    padding: 10px 0;
-    background: #eee;
-    margin: 0;
-}
-  
-.days li 
-{
-    list-style-type: none;
-    display: inline-block;
-    width: 12%;
-    text-align: center;
-    margin-bottom: 10px;
-    font-size:13px;
-    color: #777;
-    padding: 3.5px;
-    margin-left: 2px;
-}
- 

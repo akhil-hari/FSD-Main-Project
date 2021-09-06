@@ -3,6 +3,20 @@ const doctorModel=require('../models/doctorData');
 const userModel=require('../models/userData');
 const ratingModel=require('../models/ratingData');
 
+const { 
+   userScheduleStatus,
+   doctorAvailable,
+   setUserRating,
+   bookAppointment
+ }= require('../controller/user')
+
+ const {
+   setDoctorSchedule,
+    getUpcomingVisits,
+    userAppointmentConfirm
+ }= require('../controller/doctor');
+
+
 const {
    list_doctors,
    getDoctor,
@@ -56,7 +70,7 @@ const apiRouter=new express.Router();
    apiRouter.get('/search',async (req,res)=>{
       let query=req.query.q;
       res.json(await search(query));
-   })
+   });
    apiRouter.get('/doctor/:id',async (req,res)=>{
       let doctorId=req.params.id;
       let data=await getDoctor(doctorId);
@@ -69,10 +83,16 @@ const apiRouter=new express.Router();
       res.json(data);
    });
 
-   apiRouter.get('/upcoming_schedule/:id',async (req,res)=>{
-      let data=await upcomingDoctorSchedule(req.params.id);
+   apiRouter.get('/upcoming_visits/:id',async (req,res)=>{
+      let data=await getUpcomingVisits(req.params.id);
       res.json(data);
-   })
+   });
+
+   apiRouter.get('/doctor_available',async (req,res)=>{
+      let id=req.query.id;
+      data=await doctorAvailable(id);
+      res.json(data);
+   });
 
 
    apiRouter.get('/add_user',async (req,res)=>{
@@ -106,25 +126,84 @@ const apiRouter=new express.Router();
       let item={
          doctor:ObjectId('60f19de2dff78773927ffafe'),
          type:'onetime',
-         schedule:{start:new Date(2021,8,1,13,20),end:new Date(2021,8,1,15,30)},
+         // schedule:{start:new Date(2021,8,1,13,20),end:new Date(2021,8,1,15,30)},
+            schedule:{
+               start:new Date(2021,8,7,17,30),
+               end:new Date(2021,8,7,18,30)
+            
+            },
          timestamp:Date.now()
       }
       let data=doctorSchedule(item)
       await data.save().then(result=>{res.send(`<h1 style="color:cornflowerblue">${result} Created in doctorSchedules</h1>`)}).catch(err=>{res.send(`<h1 style="color:tomato"> ${err} Failed</h1>`)})
    });
 
-   apiRouter.get('/user_schedule',async (req,res)=>{
+apiRouter.get('/schedule_status',async (req,res)=>{
+   id=req.query.id;
+   let data=userScheduleStatus(id);
+   res.json(await data);
+
+});
+
+apiRouter.post('/set_schedule',async (req,res)=>{
+   let doctor=req.body.doctor;
+   let type=req.body.type;
+   let schedule=req.body.schedule;
+   let data=setDoctorSchedule(doctor,schedule,type);
+ 
+   res.json(await data);
+   
+});
+
+apiRouter.post('/confirm_appointment',async (req,res)=>{
+   let id=req.body.id;
+   let mode=req.body.mode;
+   data=await userAppointmentConfirm(id,mode);
+      res.json(data);
+
+});
+
+apiRouter.post('/book_appointment',async (req,res)=>{
+   let doctor=req.body.doctor;
+   let user=req.body.user;
+   let schedule=req.body.schedule;
+
+   data=await bookAppointment(doctor,user,schedule);
+      res.json(data);
+
+
+});
+
+apiRouter.post('/set_userrating',async (req,res)=>{
+   let doctor=req.body.doctor;
+   let user=req.body.user;
+   let rating=req.body.rating;
+   let review=req.body.review;
+
+   data=await setUserRating(doctor,user,rating,review);
+   res.json(data);
+
+});
+
+
+apiRouter.get('/user_schedule',async (req,res)=>{
       let item={
-         user:ObjectId('60f19de2dff78773927ffafe'),
+         user:ObjectId('60fd781e81ab452f060c00f0'),
          doctor:ObjectId('60f19de2dff78773927ffafe'),
-         status:'confirmed',
-         schedule:new Date(2021,7,8,16,00),
+         status:'pending',
+         schedule:new Date(2021,11,9,17,30),
          //remark:{remark:'Feaver',prescription:'parcetamol IP 1-0-1\npolybione 5ml daily'},
          timestamp:Date.now()
       }
       let data=userSchedule(item)
       await data.save().then(result=>{res.send(`<h1 style="color:cornflowerblue">${result} Created in userSchedules</h1>`)}).catch(err=>{res.send(`<h1 style="color:tomato"> ${err} Failed</h1>`)})
-   });   
+   }); 
+   apiRouter.get('/test',async (req,res)=>{
+      
+      data=await setUserRating('61042c9c5689931c807c3e18','60fd784b02bcac2f325dd57c',3,'I had a bad experience');
+      res.json(data);
+      
+   });
 
   
    

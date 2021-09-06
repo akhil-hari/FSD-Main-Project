@@ -19,13 +19,29 @@
                 </span>
                 <div id="search"> 
                     <form>
-                        <input type="text" id="myInput" placeholder="search" onkeyup="searchResult()">
-                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        <input type="text" id="myInput" placeholder="search" >
+                        <button type="submit" (click)="searchResult()"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
                   </div>
         </div>
         
       </div>
+
+      
     
   
     </div>
+    <div *ngIf="nshow" style="padding:5px auto;display:form;flex-direction: row;align-items: center;height:45px;width:100%;background-color: rgba(0, 128, 0, 0.85);color:white;text-align: center;">
+     <span >
+      <span *ngIf="ntype=='success'" style="font-size:30px;margin-right:10px;margin-left:10px;" >&#10003;</span>
+      <span *ngIf="ntype=='err'" style="font-size:30px;margin-right:10px;margin-left:10px" >&#10007;</span>
+      <span>{{ncontent}}</span>
+      
+      
+     </span> 
+      
+      
+
+    </div>
+  
+ 

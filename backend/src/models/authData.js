@@ -12,7 +12,8 @@ let authSchema=mongoose.Schema({
    email:String,
    password:String,
    role:String,
-   profile:mongoose.Types.ObjectId
+   profile:mongoose.Types.ObjectId,
+   disabled:Boolean,
     
     // timing:[mongoose.Schema.Types.Mixed]
     

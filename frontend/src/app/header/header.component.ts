@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NotifictionService } from '../notifiction.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private ns:NotifictionService) { }
+  nshow:boolean=false;
+  ncontent:string='';
+  ntype:string='err';
+  searchResult():void{
+    // console.log('keyup');
+    this.ns.notify({msg:'p123rtv agajh hs hello kelly!',type:'success'});
+  }
   ngOnInit(): void {
+    this.ns.notification.subscribe({
+      next:(obj)=>{
+        this.nshow=true;
+        this.ncontent=obj.msg;
+        this.ntype=obj.type;
+
+        
+        setTimeout(()=>{this.nshow=false;this.ncontent=''},8000);
+      }
+    })
+    
+
   }
 
 }

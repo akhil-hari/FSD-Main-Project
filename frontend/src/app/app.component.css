@@ -1,0 +1,11 @@
+app-header{
+    position: fixed;
+    top:0px;
+    width: 100%;
+    z-index: 12;
+}
+
+app-body,app-footer{
+    position: relative;
+    top:100px;
+}

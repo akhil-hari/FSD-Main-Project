@@ -28,7 +28,7 @@ export class RatingsComponent implements OnInit {
   }
   rateConfirm():any{
     this.tempRating=this.rating;
-    console.log('ops')
+    console.log('ops');
     this.outputRating.emit(this.tempRating)
   }
 

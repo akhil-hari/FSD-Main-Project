@@ -2,16 +2,20 @@
 {
     position: relative;
     display: flex;
+    background-color:rgb(207, 206, 203);
     flex-direction: column;
     background-clip: border-box;
     border-radius: .25rem;
     box-shadow: 0 1px 3px 0 rgba(3, 3, 3, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     padding: 70px;
-    margin-top: 75px;
-    margin-bottom: 80px;
-    margin-left: 30%;
-    margin-right: 150px;
-    width: 45%;
+    /* margin-top: 75px; */
+    /* margin-bottom: 80px; */
+    /* margin-left: 30%; */
+    /* margin-right: 150px; */
+    margin:auto;
+    margin-top:30px;
+    margin-bottom:30px;
+    width: 60%;
     height: fit-content;
 }
 
@@ -25,3 +29,23 @@
     color: rgb(0, 89, 255);
 }
 
+.tab{
+    margin-left:10px;
+    margin-right:10px;
+    /* margin-top:20px; */
+    color:white;
+}
+.tab:hover{
+    color:white;
+    background-color:royalblue;
+}
+.live{
+    background-color:whitesmoke;
+    /* color:rgb(24, 56, 28); */
+    color:green;
+    border:2px solid green;
+}
+.live:hover{
+    background-color:whitesmoke;
+    color:green;
+}
