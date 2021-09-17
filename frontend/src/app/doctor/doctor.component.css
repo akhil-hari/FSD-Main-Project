@@ -1,8 +1,11 @@
-body{
+.container{
     margin-top:20px;
     color: #1a202c;
     text-align: left;
-    background-color: #a9e6d5;    
+    height: fit-content;
+    min-height: 90vh;
+    overflow: hidden;
+    /* background-color: #a9e6d5;     */
 }
 
 .main-body{
@@ -79,18 +82,93 @@ body{
 }
 
 .button {
-    margin-left:55%;
+    margin:0px 35%;
     border: none;
     background-color: rgba(7, 252, 19, 0.849);
+    width:30%;
     font-size: 18px;
     padding: 10px 25px;
-    display: inline-block;
+    /* display: inline-block; */
     border-radius: 22px;
     margin-top: 70px;
     margin-bottom: 40px;
 }
 
 .button:hover {
+
     background-color: #008CBA;
     color: white;
 }
+
+#ratings-review{
+    
+    width:100%;
+}
+.btn-save{
+    background-color: green;
+    margin:5px 10px;
+    color:white;
+}
+.btn-save:hover,.btn-save:active{
+    background-color:rgb(24, 78, 24);
+ 
+    color:white;
+
+}
+.btn-cancel{
+    background-color:red;
+    margin:5px 10px;
+    color:white;
+}
+
+.btn-cancel:hover,.btn-cancel:active{
+    background-color:rgb(78, 24, 24);
+    color:white;
+
+}
+
+.btn-edit{
+    background-color:rgb(190, 185, 185);
+    margin:5px 10px;
+    height:fit-content;
+    color:white;
+}
+
+.btn-edit:hover,.btn-edit:active{
+    background-color:royalblue;
+    color:white;
+
+}
+#reviews-list{
+    height:300px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#reviews-list td{
+
+    padding:30px 0px;
+
+}
+
+.pro-img{
+    background-image:url("https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg");
+    width:100%;
+    height:100%;
+    border-radius: 50%;
+    overflow: hidden;
+    background-size: cover;
+    background-clip: border-box;
+    mask-clip:border-box;
+}
+.round-img{
+
+    width:128px;
+    height:128px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    background-image: url('/assets/profile.svg');
+
+}
+

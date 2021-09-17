@@ -17,7 +17,7 @@ export class DoctorProfileComponent implements OnInit,AfterViewInit {
   constructor(private ds:DoctorService) { }
   schedule:any;
   
-  tab:string='setSchedule';
+  tab:string='visitInfo';
 
   addBtnState:any={
     w:false,

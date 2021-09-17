@@ -23,10 +23,10 @@
 <div style="width:60%;margin:auto" class="card mt-3" >
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">Active</a>
+          <a class="nav-link" [ngClass]="{'active':tab==='visitInfo'}" id="visits-tab" (click)="tab='visitInfo'">Visits Update</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#">Link</a>
+          <a class="nav-link" [ngClass]="{'active':tab==='setSchedule'}" id="set-schedule-tab" (click)="tab='setSchedule'">Set Schedule</a>
         </li>
         
       </ul>
@@ -37,13 +37,151 @@
 
     <!-- TAB1 -->
 
-    <div  class="tab-pane fade">
+    <div  class="tab-pane fade" [ngClass]="{'show active':tab==='visitInfo'}">
+
+      <div id="upcoming-visits">
+        <div class="tab-accordian">
+
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Visits Today
+                </mat-panel-title>
+                <mat-panel-description>
+                 View visits today
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <table>
+                <tr>
+                  <td>
+                    <h5 style="color:royalblue">
+      
+                      user name 
+      
+                    </h5>
+                    
+                    
+                    <div>
+                      <small>sex: female | age: 40</small>
+                       
+      
+                    </div>
+                     
+                  </td>
+                  <td>
+                    
+                    <span>
+      
+      
+                      <div style="display: inline-block;">
+                        <h5>
+                          <span>
+                            <span style="color:royalblue">Appointment:</span>
+                          18:30 
+      
+                          </span>
+                          
+                        </h5>
+                        
+        
+                        <div>
+        
+                      
+        
+                        </div>
+        
+                      </div>
+                    </span>
+                  </td>
+                  
+                </tr>
+              </table>
+              
+            </mat-expansion-panel>
+
+
+         
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Pending Appointments
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Confirm/Reject pending appointments
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <table>
+                  <tr>
+                    <td>
+                      <h5 style="color:royalblue">
+        
+                        user name 
+        
+                      </h5>
+                      <br>
+                      
+                      <div>
+                        <small>sex: female | age: 40</small>
+                         
+        
+                      </div>
+                       
+                    </td>
+                    <td>
+                      
+                      <span>
+        
+        
+                        <div style="display: inline-block;">
+                          <h5>
+                            <span>
+                              <span style="color:royalblue">Appointment:</span>
+                            18:30 <h6><em>(10/12/2019) </em></h6> 
+        
+                            </span>
+                            
+                          </h5>
+                          
+          
+                          <div>
+          
+                        <small>* 7 people on the same slot</small> 
+          
+                          </div>
+          
+                        </div>
+                      </span>
+                    </td>
+                    <td>
+                      <span>
+        
+                        <button class='btn-confirm'>confirm</button>
+                        <button class='btn-reject'>reject</button>
+        
+                      </span>
+                     
+                    </td>
+                  </tr>
+                </table>
+              </mat-expansion-panel>
+  
+          </mat-accordion>
+  
+
+        </div>
+     
+
+
+      </div>
+
+      
 
     </div>
     <!-- TAB1 end -->
 
     <!-- TAB2 -->
-    <div  class="tab-pane fade show active">
+    <div  class="tab-pane fade" [ngClass]="{'show active':tab==='setSchedule'}">
       <div class="tab-accordian">
         <mat-accordion >
 

@@ -18,7 +18,7 @@ export class RatingsComponent implements OnInit {
   outputRating:EventEmitter<number>=new EventEmitter<number>();
   rate(n:number):any{
       this.tempRating=this.rating;
-      this.rating=n;
+      this.rating=n*1.1;
       
 
   }
@@ -26,15 +26,27 @@ export class RatingsComponent implements OnInit {
     this.rating=this.tempRating;
 
   }
+  private round(n:number):number{
+    let r=n%1;
+    if(r==0){
+      return n;
+    }
+    else if(r>0.5){
+      return Math.ceil(n);
+    }
+    else {
+      return Math.floor(n);
+    }
+  }
   rateConfirm():any{
     this.tempRating=this.rating;
-    console.log('ops');
-    this.outputRating.emit(this.tempRating)
+    console.log(this.round(this.tempRating/1.1));
+    this.outputRating.emit(this.round(this.tempRating/1.1))
   }
 
   ngOnInit(): void {
     
-      this.rating=this.inputRating;
+      this.rating=this.inputRating*1.1;
       // this.rating=10;
   }
 

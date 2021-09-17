@@ -33,6 +33,15 @@ export class DoctorService {
     let setSchedule=this.http.post(this.baseUrl+'api/set_schedule',{doctor:doctor,schedule:schedule,type:type});
     return setSchedule;
   }
+  userFromId(id_string:string):any{
+    let user=this.http.get(this.baseUrl+'api/u',{params:{id:id_string}})
+    return user;
+
+  }
+  search(query:string):any{
+    let result=this.http.get(this.baseUrl+'api/search',{params:{q:query}})
+    return result;
+  }
 
 
 }

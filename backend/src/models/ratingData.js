@@ -13,7 +13,7 @@ ratingSchema=mongoose.Schema({
     rating:Number,
     review:String,
     created:Date,
-    Updated:Date
+    updated:Date
 })
 
 ratingModel=mongoose.model('ratingData',ratingSchema);

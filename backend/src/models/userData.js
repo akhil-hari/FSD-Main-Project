@@ -11,6 +11,8 @@ userSchema=mongoose.Schema({
     name: String,
     age: Number,
     phone: String,
+    sex: String,
+    image:String
   
     
 });

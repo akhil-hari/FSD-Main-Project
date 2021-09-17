@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   ntype:string='err';
   searchResult():void{
     // console.log('keyup');
-    this.ns.notify({msg:'p123rtv agajh hs hello kelly!',type:'success'});
+    this.ns.notify({msg:'p123rtv agajh hs hello kelly!',type:'err'});
   }
   ngOnInit(): void {
     this.ns.notification.subscribe({
@@ -29,6 +29,12 @@ export class HeaderComponent implements OnInit {
     })
     
 
+  }
+
+  capitalize(s:string):string {
+    s=s.slice(0,1).toUpperCase()+s.slice(1,s.length).toLowerCase();
+    return s;
+    
   }
 
 }

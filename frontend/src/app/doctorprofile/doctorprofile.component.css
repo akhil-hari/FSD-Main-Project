@@ -272,3 +272,39 @@ body{
     height: 40px;
     margin: 5px;
 }
+
+#upcoming-visits{
+
+    width:100%;
+    /* border:2px solid; */
+
+}
+
+#upcoming-visits td{
+
+    padding:30px;
+
+}
+#upcoming-visits button{
+    margin: 0px 20px 0px 15px;
+    padding:10px 20px;
+    border:none;
+    border-radius: 10px;
+}
+.btn-confirm{
+    background-color: green;
+    color:white;
+  
+}
+.btn-confirm:hover,.btn-confirm:active{
+    background-color:rgb(24, 78, 24);
+}
+
+.btn-reject{
+    background-color: red;
+    color:white;
+
+}
+.btn-reject:hover,.btn-reject:active{
+    background-color:rgb(78, 24, 24);
+}

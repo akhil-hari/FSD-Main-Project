@@ -15,6 +15,14 @@ export class DoctorComponent implements OnInit {
   ratingObj:any={};
   rating:number=0;
   tab:string='home';
+  editReview:boolean=false;
+  reviews:Array<any>=[];
+
+  toggleEdit(state:boolean):void{
+    this.editReview=state;
+ 
+
+  }
 
   ngOnInit(): void {
     this.tab='home';
@@ -26,6 +34,17 @@ export class DoctorComponent implements OnInit {
       if(this.doctor.userRatings){
       this.ratingObj=this.doctor.userRatings;
       this.rating=(this.doctor.userRatings.avgRating*20-(this.doctor.userRatings.avgRating*20)%1)|0
+      this.doctor.userRatings.reviews.forEach((el:any)=>{
+
+        this.ds.userFromId(el.user).subscribe((u:any)=>{
+          console.log(el.user);
+
+          this.reviews.push({user:u,review:el.review,rating:el.rating,updated:el.updated});
+
+        })
+
+      });
+      console.log(this.reviews);
       }
       
       this.doctor=this.doctor.doctor;
@@ -37,6 +56,12 @@ export class DoctorComponent implements OnInit {
   f():any{
     console.log(this.doctor)
     this.doctor=this.doctor
+  }
+  dateCreator(s:string):string{
+    let d=new Date(s);
+    return d.toLocaleDateString();
+
+
   }
 
 }

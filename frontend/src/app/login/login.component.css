@@ -25,6 +25,7 @@
     
 }
 
+
 .a:hover{
     color: rgb(0, 89, 255);
 }
@@ -48,4 +49,11 @@
 .live:hover{
     background-color:whitesmoke;
     color:green;
+}
+.submit:disabled{
+    background-color:gray;
+
+}
+.submit:disabled:hover{
+    background-color:gray;
 }

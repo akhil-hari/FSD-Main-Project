@@ -28,3 +28,36 @@
 .a:hover{
     color: rgb(0, 89, 255);
 }
+
+
+.tab{
+    margin-left:10px;
+    margin-right:10px;
+    /* margin-top:20px; */
+    color:white;
+}
+.tab:hover{
+    color:white;
+    background-color:royalblue;
+}
+.live{
+    background-color:whitesmoke;
+    /* color:rgb(24, 56, 28); */
+    color:green;
+    border:2px solid green;
+}
+.live:hover{
+    background-color:whitesmoke;
+    color:green;
+}
+.uploadImg{
+    box-sizing: border-box;
+    background-image: url("/assets/add-image.svg");
+    background-size:120% 120%;
+    background-position: center;
+    overflow: hidden;
+    /* border:6px solid red; */
+
+}
+
+/* .uploadImg[src=""] { content:url("/assets/add-image.svg"); } */

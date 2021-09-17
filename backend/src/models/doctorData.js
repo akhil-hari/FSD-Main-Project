@@ -16,6 +16,7 @@ let doctorSchema=mongoose.Schema({
     awards:String,
     phone:String,
     email:String,
+    image:String,
     
     // timing:[mongoose.Schema.Types.Mixed]
     

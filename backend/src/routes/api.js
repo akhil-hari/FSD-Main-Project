@@ -18,13 +18,14 @@ const {
 
 
 const {
-   list_doctors,
-   getDoctor,
-   getHospital,
-   search,
-   getDoctorSchedule,
-   getUserSchedule,
-   upcomingDoctorSchedule
+   listDoctors,
+    getDoctor,
+    getHospital,
+    search,
+    getDoctorSchedule,
+    getUserSchedule,
+    getDoctorName,
+    getUserName
  }=require('../controller/general');
 
 const ObjectId=require('mongoose').Types.ObjectId;
@@ -64,13 +65,29 @@ const apiRouter=new express.Router();
    apiRouter.get('/list_doctors',async (req,res)=>{
          console.log('apiRouter')
          //console.log(await getDoctor('60f19de2dff78773927ffafe'))
-       res.json(await list_doctors());
+       res.json(await listDoctors());
   
    });
    apiRouter.get('/search',async (req,res)=>{
       let query=req.query.q;
       res.json(await search(query));
    });
+
+   apiRouter.get('/u',async (req,res)=>{
+
+      let id=req.query.id;
+      res.json(await getUserName(id));
+
+   });
+
+   apiRouter.get('/d',async (req,res)=>{
+
+      let id=req.query.id;
+      res.json(await getDocterName(id));
+
+   });
+
+
    apiRouter.get('/doctor/:id',async (req,res)=>{
       let doctorId=req.params.id;
       let data=await getDoctor(doctorId);

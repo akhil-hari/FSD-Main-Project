@@ -21,8 +21,9 @@ async function getDoctor(id){
             avgRating:{
                 $avg:'$rating'
             },
+            count:{$sum:1},
             reviews:{
-                $push:{user:'$user',review:'$review',rating:'$rating'}
+                $push:{user:'$user',review:'$review',rating:'$rating',updated:'$updated'}
             }
         }
     }
@@ -37,11 +38,35 @@ async function getDoctor(id){
     return data;
 
 }
+async function getUserName(id){
+    let data=userModel.findOne({_id:id})
+    let output;
+    if(await data.then(r=>{output=r;return true}).catch(err=>{return false})){
+        return output;
+    }
+    else{
+        return {type:'err',msg:'Unknown Error'}
+    }
 
-async function list_doctors(){
+}
+
+async function getDoctorName(id){
+    let data=userModel.findOne({_id:id})
+    let output;
+    if(await data.then(r=>{output=r;return true}).catch(err=>{return false})){
+        return output;
+    }
+    else{
+        return {type:'err',msg:'Unknown Error'}
+    }
+
+}
+
+async function listDoctors(){
     
     // A function to retreve a list of doctors 
     let doctors= await doctorModel.find().catch((err)=>{console.log(`${err}:Database Connection Failed while listing doctors.!!`)});
+    console.log(doctors);
     let data=await doctors.map(async item=>{
         let doctorId=item._id;
         //let review=await ratingModel.find({doctor:doctorId},'review').catch(err=>{review=[]});
@@ -55,7 +80,9 @@ async function list_doctors(){
                 _id:"$doctor",
                 avgRating:{
                     $avg:'$rating'
+
                 },
+                count:{$sum:1}
                 
             }
         }
@@ -74,8 +101,33 @@ async function list_doctors(){
 }
 
 async function search(query){
-    result=doctorModel.find({$or:[{name:{$regex:query,$options:'i'}},{currentHospital:{$regex:query,$options:'i'}}]}).catch(err=>{console.log(`${err} :Search Failed!`)});
-    return Promise.all([result]);
+    let doctors=await doctorModel.find({$or:[{name:{$regex:query,$options:'i'}},{currentHospital:{$regex:query,$options:'i'}}]}).catch(err=>{console.log(`${err} :Search Failed!`)});
+    console.log(doctors);
+    let data=await doctors.map(async item=>{
+        let doctorId=item._id;
+        //let review=await ratingModel.find({doctor:doctorId},'review').catch(err=>{review=[]});
+        let rating=await ratingModel.aggregate([
+            
+            {
+                $match:{doctor:doctorId}
+            },
+            {
+            $group:{
+                _id:"$doctor",
+                avgRating:{
+                    $avg:'$rating'
+                },
+                count:{$sum:1}
+                
+            }
+        }
+    ]).catch(err=>{console.log(`${err}: aggregation failed`)})
+    // console.log(rating)    
+
+         return {doctor:item,userRatings:rating[0]||{}};
+    })
+    
+    return await Promise.all(data);
 }
 
 async function add_hospital(){
@@ -103,12 +155,14 @@ async function getDoctorSchedule(doctor_id,user_id){
  }
 module.exports={
 
-    list_doctors,
+    listDoctors,
     getDoctor,
     getHospital,
     search,
     getDoctorSchedule,
     getUserSchedule,
+    getDoctorName,
+    getUserName
     // upcomingDoctorSchedule
 
 }
