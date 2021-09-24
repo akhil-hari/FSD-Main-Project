@@ -22,7 +22,7 @@ export class DoctorService {
   }
 
   getUpcomingVisits(id_string:string){
-    let upcomingVisits=this.http.get(this.baseUrl+'api/upcoming_visits/'+id_string);
+    let upcomingVisits=this.http.get(this.baseUrl+'api/upcoming_visits/',{params:{id:id_string}});
     return upcomingVisits;
   }
   getDoctorAvailable(id_string:string){
@@ -36,6 +36,16 @@ export class DoctorService {
   userFromId(id_string:string):any{
     let user=this.http.get(this.baseUrl+'api/u',{params:{id:id_string}})
     return user;
+
+  }
+  confirmAppointment(id:string,mode:string){
+   let result=this.http.post(this.baseUrl+'api/confirm_appointment',{id,mode})
+   return result;
+  }
+  getCountOfConfirmed(schedule:any,id:string){
+    console.log(schedule)
+    let result=this.http.get(this.baseUrl+'api/confirmed_count',{params:{schedule,id}});
+    return result;
 
   }
   search(query:string):any{

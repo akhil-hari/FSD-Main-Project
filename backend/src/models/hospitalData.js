@@ -15,7 +15,7 @@ let hospitalSchema=mongoose.Schema({
     //hospitalRecord:[String],
     address:mongoose.Schema.Types.Mixed,
     contact:String,
-    position:mongoose.Schema.Types.Mixed
+    // position:mongoose.Schema.Types.Mixed
     
 
 

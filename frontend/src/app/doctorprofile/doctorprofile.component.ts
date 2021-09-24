@@ -51,6 +51,13 @@ export class DoctorProfileComponent implements OnInit,AfterViewInit {
   @ViewChild('onetimeExp')
   onetimeExp!:MatExpansionPanel;
 
+  @ViewChild('visitsToday')
+  visitsTodayExp!: MatExpansionPanel;
+
+  @ViewChild('pendingAppointments')
+  pendingAppointmentsExp!: MatExpansionPanel;
+
+
 
   
   days:Array<any>=[];
@@ -58,6 +65,8 @@ export class DoctorProfileComponent implements OnInit,AfterViewInit {
   onetime:Array<any>=[];
   notOnEveryMonth:boolean=false;
   startdate:Date = new Date();
+  upcomingVisits:Array<any>=[];
+  doctor_id:string='60f19de2dff78773927ffafe';
 clickfn():void{
   console.log(this.weeklyForm.value);
 }
@@ -103,7 +112,7 @@ saveBtn(type:string){
           return -1;
         }
       });
-      this.ds.setDoctorSchedule('60f19de2dff78773927ffafe',this.schedule.weekly,"weekly").subscribe((result:any)=>{
+      this.ds.setDoctorSchedule(this.doctor_id,this.schedule.weekly,"weekly").subscribe((result:any)=>{
         console.log(result);
         this.ngOnInit();
         this.ngAfterViewInit(1);
@@ -122,7 +131,7 @@ saveBtn(type:string){
           let i=this.schedule.monthly.indexOf(el);
           this.schedule.monthly[i]={date:parseInt(item.date),schedule:{start:this.timeStringGenerator(item.start),end:this.timeStringGenerator(item.end)}};
           
-          this.ds.setDoctorSchedule('60f19de2dff78773927ffafe',this.schedule.monthly,"monthly").subscribe((result:any)=>{
+          this.ds.setDoctorSchedule(this.doctor_id,this.schedule.monthly,"monthly").subscribe((result:any)=>{
             
             this.ngOnInit();
             this.ngAfterViewInit(2);
@@ -147,7 +156,7 @@ saveBtn(type:string){
         }
       });
 
-      this.ds.setDoctorSchedule('60f19de2dff78773927ffafe',this.schedule.monthly,"monthly").subscribe((result:any)=>{
+      this.ds.setDoctorSchedule(this.doctor_id,this.schedule.monthly,"monthly").subscribe((result:any)=>{
         
         this.ngOnInit();
         this.ngAfterViewInit(2);
@@ -158,7 +167,7 @@ saveBtn(type:string){
   else if(type=='onetime'){
     let item=this.onetimeForm.value;
     
-    this.ds.setDoctorSchedule('60f19de2dff78773927ffafe',[{schedule:{start:this.timeStringGenerator(item.start,'full',item.date),end:this.timeStringGenerator(item.end,'full',item.date)},mode:1}],"onetime").subscribe((result:any)=>{
+    this.ds.setDoctorSchedule(this.doctor_id,[{schedule:{start:this.timeStringGenerator(item.start,'full',item.date),end:this.timeStringGenerator(item.end,'full',item.date)},mode:1}],"onetime").subscribe((result:any)=>{
       console.log(result);
         
       this.ngOnInit();
@@ -183,7 +192,7 @@ removeBtn(item:any,type:string):void{
         // s=this.schedule.weekly[i];
         // console.log(i);
         this.schedule.weekly.splice(i,1);
-        this.ds.setDoctorSchedule('60f19de2dff78773927ffafe',this.schedule.weekly,"weekly").subscribe((result:any)=>{
+        this.ds.setDoctorSchedule(this.doctor_id,this.schedule.weekly,"weekly").subscribe((result:any)=>{
           console.log(result);
           this.ngOnInit();
           this.ngAfterViewInit(1);
@@ -211,7 +220,7 @@ removeBtn(item:any,type:string):void{
         // s=this.schedule.weekly[i];
         // console.log(i);
         this.schedule.monthly.splice(i,1);
-        this.ds.setDoctorSchedule('60f19de2dff78773927ffafe',this.schedule.monthly,"monthly").subscribe((result:any)=>{
+        this.ds.setDoctorSchedule(this.doctor_id,this.schedule.monthly,"monthly").subscribe((result:any)=>{
           console.log(result);
           this.ngOnInit();
           this.ngAfterViewInit(2);
@@ -244,7 +253,7 @@ removeBtn(item:any,type:string):void{
     });
     s.mode=-1;
     console.log(s);
-    this.ds.setDoctorSchedule('60f19de2dff78773927ffafe',[s],"onetime").subscribe((result:any)=>{
+    this.ds.setDoctorSchedule(this.doctor_id,[s],"onetime").subscribe((result:any)=>{
       console.log(result);
       this.ngOnInit();
       this.ngAfterViewInit(3);
@@ -303,6 +312,28 @@ private twoDigit(n:number):string{
 
 }
 
+twoDigitTime(n:Date):string{
+  let h=this.twoDigit(n.getHours());
+  let m=this.twoDigit(n.getMinutes());
+  return `${h}:${m}`;
+
+}
+
+confirmAppointment(id:string,mode:string){
+  console.log(id)
+
+  this.ds.confirmAppointment(id,mode).subscribe((data:any) =>{
+    if(!data.type){
+      console.log(data);
+      this.ngOnInit();
+      this.ngAfterViewInit(4);
+
+    }
+  })
+
+
+}
+
 
 
   ngOnInit(): void {
@@ -318,7 +349,7 @@ private twoDigit(n:number):string{
       {name:'Saturday',day:6,schedule:{}}
     ];
    
-    this.ds.getDoctorAvailable('60f19de2dff78773927ffafe').subscribe(result=>{
+    this.ds.getDoctorAvailable(this.doctor_id).subscribe(result=>{
         this.schedule=result;
         if(this.schedule.hasOwnProperty('weekly')){
           this.schedule.weekly.forEach((el:any)=>{
@@ -331,6 +362,7 @@ private twoDigit(n:number):string{
 
           )
         }
+
 
         if(this.schedule.hasOwnProperty('monthly')){
           let largest=0;
@@ -368,6 +400,45 @@ private twoDigit(n:number):string{
         }
       
     });
+
+    this.ds.getUpcomingVisits(this.doctor_id).subscribe((data:any)=>{
+      this.upcomingVisits=[];
+      console.log(data);
+      // this.upcomingVisits=data;
+      if(!data.type||data.type!='err'){
+      data.forEach((el:any)=>{
+        this.ds.userFromId(el.user).subscribe((u:any)=>{
+          console.log(el.user);
+
+          this.ds.getCountOfConfirmed(el.schedule,el._id).subscribe((count:any)=>{
+            if(!(count.type&&count.type=='err')){
+              this.upcomingVisits.push({user:u,schedule:new Date(el.schedule),id:el._id,count:count.count});
+              console.log(count);
+             
+              console.log({user:u,schedule:new Date(el.schedule),id:el._id,count:count.count});
+              
+            }
+            else{
+              this.upcomingVisits.push({user:u,schedule:new Date(el.schedule),id:el._id,count:0});
+              
+
+            }
+            
+
+          })
+          
+
+          
+
+        })
+
+
+      })
+    }
+      console.log(this.upcomingVisits);
+    });
+
+
     
 
 
@@ -375,18 +446,28 @@ private twoDigit(n:number):string{
 
     ngAfterViewInit(n:number=0):void{
       if(n==1){
+        this.tab='setSchedule';
         this.weeklyExp.open();
 
 
       }
       else if(n==2){
+        this.tab='setSchedule';
         this.monthlyExp.open();
         // console.log('ghj');
   
       }
       else if(n==3){
+        this.tab='setSchedule';
         this.onetimeExp.open();
-  
+      }
+      else if(n==4){
+        this.tab='visitInfo';
+        this.pendingAppointmentsExp.open();
+      }
+      else if(n==5){
+        this.tab='visitInfo';
+        this.visitsTodayExp.open();
       }
   
       

@@ -6,12 +6,15 @@
     <h3 style="font-weight: bold;margin-bottom: 10px;text-align: center">Already a Member? <br> Login Here</h3>
     <br>
     
-    <form id="LogIn" [formGroup]='loginForm' (ngSubmit)='onLogin()'>
+
         <label for="">Choose Account Type</label>
         <span style="display:flex;align-items: center;width: 100%;">
             <button  class="btn  buttonGroup tab" [ngClass]="{live:acnt_type=='nu'}" [disabled]="acnt_type=='nu'" (click)="toggle_acnt_type('nu')" id="nUBtn">Normal User</button>
             <button  class="btn  buttonGroup tab" [ngClass]="{live:acnt_type=='doc'}" [disabled]="acnt_type=='doc'" (click)="toggle_acnt_type('doc')" id="docBtn">Doctor</button>
         </span>
+    
+    <form id="LogIn" [formGroup]='loginForm' (ngSubmit)='onLogin()'>
+        
         <div class="form-group fieldDiv" style="margin-bottom: 0px;">
         <br>
 
@@ -22,13 +25,16 @@
         <div class="form-group fieldDiv">
             <label for="password">Password</label>
             <input type="password" class="form-control" placeholder="Password" id="password" formControlName='password' >
-            <small style='color:red' *ngIf='loginForm.controls.password.dirty||loginForm.controls.password.touched'>*enter your password</small>
+            <small style='color:red' *ngIf='loginForm.controls.password.invalid&&(loginForm.controls.password.dirty||loginForm.controls.password.touched)'>*enter your password</small>
         </div><br>
-        <div class="form-group form-check">
+        <small *ngIf='loginMsg!=""' style='color:red'>{{loginMsg}}</small>
+        <br>
+        <!-- <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="rememberMe">
             <label class="form-check-label" for="rememberMe">Remember Me</label>
         </div><br>
-        <button type="submit" class="btn buttonGroup tab submit" [disabled]='!true' style="margin-bottom:15px;" id="loginBtn">Login</button>
+        -->
+        <button type="submit" class="btn buttonGroup tab submit" [disabled]='!loginForm.valid' style="margin-bottom:15px;" id="loginBtn">Login</button>
         <br>
         <a href="#" style="color: green;">Forgot password?</a><br>    
           <div class="Create">

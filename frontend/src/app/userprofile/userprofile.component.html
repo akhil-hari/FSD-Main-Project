@@ -1,0 +1,60 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<div style="height: fit-content;min-height:90vh;overflow: hidden;width:100%;">
+
+
+    <div style="margin: auto;width:400px;height:300px;">
+        <div id="details" >
+            <img src="https://pbs.twimg.com/media/C8LVNcZVYAIBtLc.jpg" class="circle-img" width="150">
+            <div class="mt-3">
+              <h4>user.name</h4>
+              <span >
+
+                <p class="text-secondary mb-1">user.age</p>
+                <p class="text-secondary mb-1">user.sex</p>
+                <!-- <p class="text-secondary mb-1">+91008008008</p> -->
+              </span>
+              
+                  
+              </div>
+             
+
+              
+              <!-- <p class="text-muted font-size-sm"><i style="font-size:15px; color: red;" class="fa">&#xf041;</i> New Jersey</p> -->
+              <!-- <button class="btn btn-primary">Follow</button>&#160; -->
+              <!-- <button class="btn btn-outline-primary">Message</button> -->
+            </div>
+            
+    </div>
+
+
+
+    <div style="width:60%;margin: 30px auto;background-color: rgba(202, 198, 198, 0.637);padding: 40px;border-radius: 30px;">
+        <h1>Status of your Appointments</h1>
+        <div style='width: 100%;height:300px;margin:30px;overflow-y: scroll;overflow-x: hidden;'>
+
+            <table style="width:100%">
+                <tr>
+                    <td class='royalblue'>
+                        doctor1
+                    </td>
+                    <td class='royalblue' style='margin:auto'>
+                        18:30 - 1/12/2021
+                    </td>
+                    <td>
+                         <span style='font-weight: 700;' [ngClass]="{'orange':status=='pending','red':status=='rejected','green':status=='confirmed'}" > confirmed</span> <button *ngIf='status!="rejected"' class='btn-cancel'>Cancel</button>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+     
+        </div>
+
+
+    
+    </div>
+
+
+    
+    

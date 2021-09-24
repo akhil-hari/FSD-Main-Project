@@ -3,7 +3,7 @@ const hospitalModel=require('../models/hospitalData');
 const ratingModel=require('../models/ratingData');
 const ObjectId=require('mongoose').Types.ObjectId;
 const userSchedule=require('../models/userSchedule');
-
+const { createAuth }=require('../controller/auth');
 
 
 
@@ -73,7 +73,7 @@ async function listDoctors(){
         let rating=await ratingModel.aggregate([
             
             {
-                $match:{doctor:doctorId}
+                $match:{doctor:ObjectId(doctorId)}
             },
             {
             $group:{
@@ -102,7 +102,7 @@ async function listDoctors(){
 
 async function search(query){
     let doctors=await doctorModel.find({$or:[{name:{$regex:query,$options:'i'}},{currentHospital:{$regex:query,$options:'i'}}]}).catch(err=>{console.log(`${err} :Search Failed!`)});
-    console.log(doctors);
+    // console.log(doctors);
     let data=await doctors.map(async item=>{
         let doctorId=item._id;
         //let review=await ratingModel.find({doctor:doctorId},'review').catch(err=>{review=[]});
@@ -153,6 +153,67 @@ async function getDoctorSchedule(doctor_id,user_id){
     data=await userSchedule.find({doctor:ObjectId(doctor_id),user:ObjectId(user_id)}).catch(err=>{console.log(`${err}: can't get from userSchedule data`)})
     return await Promise.all([data])
  }
+
+ async function signUp(item){
+     let profile;
+     let model;
+     if(item.role=='doctor'){
+         let input={
+            name:item.name, 
+            speciality:item.speciality,
+            currentHospital:item.currentHospital,
+            experience:new Date(item.experience),
+            phone:item.phone,
+            email:item.email,
+            image:item.image,
+
+         }
+         model=doctorModel(input).then(r=>{profile=r._id;return true;}).catch(err=>{return false});
+        
+     }
+     else if (item.role=='user'){
+        let input={
+            name: item.name,
+            age: item.age,
+            phone: item.phone,
+            sex: item.sex,
+            image:item.image
+        }
+         model=userModel(input).then(r=>{profile=r._id;return true;}).catch(err=>{return false});
+
+     }
+
+     if(await model){
+         if(await createAuth(item.email, item.password,item.role,profile)){
+             return {type:'success',msg:'Account Created Successfully'};
+        
+
+         }
+         else{
+             if(item.role=='doctor'){
+                 model=doctorModel.findOneAndDelete({_id:profile}).then(r=>{return true}).catch(err=>{return false});
+             }
+             else if(item.role=='user'){
+
+                model=userModel.findOneAndDelete({_id:profile}).then(r=>{return true}).catch(err=>{return false});
+
+             }
+             if(!(await model)){
+
+                console.log(`\nDataBase inconsistency :${item.role}: "${profile}" has been created but failed to create auth!\n`)
+
+
+             }
+             return {type:'err',msg:'Signup failed please try again'};
+         }
+     }
+     else{
+
+        return {type:'err',msg:'Signup failed please try again'};
+    }
+
+     }
+ 
 module.exports={
 
     listDoctors,
@@ -162,7 +223,8 @@ module.exports={
     getDoctorSchedule,
     getUserSchedule,
     getDoctorName,
-    getUserName
+    getUserName,
+    signUp
     // upcomingDoctorSchedule
 
 }

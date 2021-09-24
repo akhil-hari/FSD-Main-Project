@@ -11,9 +11,11 @@ const {
  }= require('../controller/user')
 
  const {
-   setDoctorSchedule,
+    setDoctorSchedule,
     getUpcomingVisits,
-    userAppointmentConfirm
+    userAppointmentConfirm,
+    getCountOfConfirmed
+
  }= require('../controller/doctor');
 
 
@@ -70,6 +72,7 @@ const apiRouter=new express.Router();
    });
    apiRouter.get('/search',async (req,res)=>{
       let query=req.query.q;
+
       res.json(await search(query));
    });
 
@@ -100,8 +103,8 @@ const apiRouter=new express.Router();
       res.json(data);
    });
 
-   apiRouter.get('/upcoming_visits/:id',async (req,res)=>{
-      let data=await getUpcomingVisits(req.params.id);
+   apiRouter.get('/upcoming_visits',async (req,res)=>{
+      let data=await getUpcomingVisits(req.query.id);
       res.json(data);
    });
 
@@ -174,6 +177,7 @@ apiRouter.post('/set_schedule',async (req,res)=>{
 
 apiRouter.post('/confirm_appointment',async (req,res)=>{
    let id=req.body.id;
+   console.log(req.headers);
    let mode=req.body.mode;
    data=await userAppointmentConfirm(id,mode);
       res.json(data);
@@ -202,6 +206,16 @@ apiRouter.post('/set_userrating',async (req,res)=>{
 
 });
 
+apiRouter.get('/confirmed_count',async (req,res)=>{
+   let schedule=req.query.schedule
+
+   let id=req.query.id;
+   console.log(id)
+      let data=getCountOfConfirmed(schedule,id);
+      console.log({schedule:schedule,confirm:await data});
+      res.json({schedule:schedule,confirm:await data})
+})
+
 
 apiRouter.get('/user_schedule',async (req,res)=>{
       let item={
@@ -216,9 +230,9 @@ apiRouter.get('/user_schedule',async (req,res)=>{
       await data.save().then(result=>{res.send(`<h1 style="color:cornflowerblue">${result} Created in userSchedules</h1>`)}).catch(err=>{res.send(`<h1 style="color:tomato"> ${err} Failed</h1>`)})
    }); 
    apiRouter.get('/test',async (req,res)=>{
-      
-      data=await setUserRating('61042c9c5689931c807c3e18','60fd784b02bcac2f325dd57c',3,'I had a bad experience');
-      res.json(data);
+      let schedule='2021-12-09T12:00:00.000+00:00';
+      let data=getCountOfConfirmed('2021-12-09T12:00:00.000+00:00','60f19de2dff78773927ffafe');
+      res.json({schedule:schedule,count:(await data)[0].count,doc_id:(await data)[0]._id});
       
    });
 

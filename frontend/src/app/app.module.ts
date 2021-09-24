@@ -1,7 +1,7 @@
 import { environment } from '../environments/environment';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http'
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,11 +25,19 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatExpansionModule} from '@angular/material/expansion'; 
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { MatDialogModule} from '@angular/material/dialog'; 
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire'
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { BookAppointmentComponent } from './book-appointment/book-appointment.component';
+import { Page404Component } from './page404/page404.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
+import { AuthInterceptor } from './authInterceptor';
+import { AdminhomeComponent } from './adminhome/adminhome.component';
+import { AddHospitalComponent } from './add-hospital/add-hospital.component';
+import { AddAdminComponent } from './add-admin/add-admin.component';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -49,6 +57,12 @@ import { BookAppointmentComponent } from './book-appointment/book-appointment.co
     
     DoctorProfileComponent,
          BookAppointmentComponent,
+         Page404Component,
+         UserprofileComponent,
+         AdminhomeComponent,
+         AddHospitalComponent,
+         AddAdminComponent,
+         AboutComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,11 +76,19 @@ import { BookAppointmentComponent } from './book-appointment/book-appointment.co
     MatNativeDateModule,
     MatExpansionModule,
     NgxMaterialTimepickerModule,
+    MatDialogModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule
    
   ],
-  providers: [],
+  providers: [
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+    },
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

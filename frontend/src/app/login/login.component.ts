@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl,FormGroup, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,21 +15,45 @@ export class LoginComponent implements OnInit {
     password:new FormControl('',[Validators.required])
   })
 
-  constructor() { }
+  constructor(private as:AuthService,private router:Router) { }
   acnt_type:string = 'nu';
   toggle_acnt_type(s:string) : void {
     this.acnt_type=s;
-  }
 
+  }
+  loginMsg:string='';
+
+  
   onLogin():void{
-    console.log(this.loginForm.valid);
+    
     let login={
       role:this.acnt_type=='doc'?'doctor':'user',
       email:this.loginForm.value.email,
       password:this.loginForm.value.password,
 
     }
-    console.log(this.loginForm);
+    this.as.login(login);
+    this.as.authBroadcast.subscribe(b=>{
+      let loginResult=b.result;
+
+      if(loginResult==500){
+        this.loginMsg="Can't reach server";
+  
+      }
+      else if(loginResult==401){
+      this.loginMsg="Email or Password is incorrect";
+      }
+      else{
+        this.loginMsg='';
+        this.router.navigate(['/']);
+        console.log(this.as.user);
+      }
+     
+    })
+    
+    
+    // console.log(this.loginForm);
+
   }
   ngOnInit(): void {
   }

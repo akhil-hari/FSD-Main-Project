@@ -8,10 +8,10 @@ import { Observable } from "rxjs";
 export class FirebaseUploadService {
 
   constructor(private storage: AngularFireStorage) { }
-  fb:any;
   
-  uploadFile(event:any):void {
-    this.fb=null;
+  
+  uploadFile(event:any):any {
+    let fb:any=null;
     const file = event.target.files[0];
     const filePath =String(Date.now());
     const fileRef = this.storage.ref(filePath);
@@ -23,9 +23,9 @@ export class FirebaseUploadService {
           let downloadURL = fileRef.getDownloadURL();
           downloadURL.subscribe(url => {
             if (url) {
-              this.fb = url;
+              fb = url;
             }
-            console.log(this.fb);
+            console.log(fb);
           });
         })
       )
@@ -34,6 +34,7 @@ export class FirebaseUploadService {
           console.log(url);
         }
       });
+      return fb
     // this.progress=task.percentageChanges();
     // console.log(':-0')
     // console.log(task.getDownloadURL())

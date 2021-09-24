@@ -43,7 +43,7 @@
         <div class="tab-accordian">
 
           <mat-accordion>
-            <mat-expansion-panel>
+            <mat-expansion-panel #visitsToday>
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   Visits Today
@@ -102,7 +102,7 @@
 
 
          
-              <mat-expansion-panel>
+              <mat-expansion-panel #pendingAppointments>
                 <mat-expansion-panel-header>
                   <mat-panel-title>
                     Pending Appointments
@@ -112,17 +112,17 @@
                   </mat-panel-description>
                 </mat-expansion-panel-header>
                 <table>
-                  <tr>
+                  <tr *ngFor='let schedule of upcomingVisits'>
                     <td>
                       <h5 style="color:royalblue">
         
-                        user name 
+                        {{schedule.user.name}} 
         
                       </h5>
                       <br>
                       
                       <div>
-                        <small>sex: female | age: 40</small>
+                        <small>sex: {{schedule.user.sex}}  | age: {{schedule.user.age}} </small>
                          
         
                       </div>
@@ -137,7 +137,7 @@
                           <h5>
                             <span>
                               <span style="color:royalblue">Appointment:</span>
-                            18:30 <h6><em>(10/12/2019) </em></h6> 
+                            {{twoDigitTime(schedule.schedule)}} <h6><em>({{schedule.schedule.toLocaleDateString()}}) </em></h6> 
         
                             </span>
                             
@@ -156,7 +156,7 @@
                     <td>
                       <span>
         
-                        <button class='btn-confirm'>confirm</button>
+                        <button class='btn-confirm' (click)='confirmAppointment(schedule.id,"confirmed")'>confirm</button>
                         <button class='btn-reject'>reject</button>
         
                       </span>
