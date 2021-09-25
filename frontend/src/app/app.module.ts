@@ -22,6 +22,7 @@ import { DoctorProfileComponent } from './doctorprofile/doctorprofile.component'
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatExpansionModule} from '@angular/material/expansion'; 
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
@@ -32,12 +33,14 @@ import { AngularFireModule } from '@angular/fire'
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { BookAppointmentComponent } from './book-appointment/book-appointment.component';
 import { Page404Component } from './page404/page404.component';
-import { UserprofileComponent } from './userprofile/userprofile.component';
+import { UserProfileComponent } from './userprofile/userprofile.component';
 import { AuthInterceptor } from './authInterceptor';
 import { AdminhomeComponent } from './adminhome/adminhome.component';
 import { AddHospitalComponent } from './add-hospital/add-hospital.component';
 import { AddAdminComponent } from './add-admin/add-admin.component';
 import { AboutComponent } from './about/about.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
+
 
 
 @NgModule({
@@ -58,11 +61,12 @@ import { AboutComponent } from './about/about.component';
     DoctorProfileComponent,
          BookAppointmentComponent,
          Page404Component,
-         UserprofileComponent,
+         UserProfileComponent,
          AdminhomeComponent,
          AddHospitalComponent,
          AddAdminComponent,
          AboutComponent,
+         AdminLoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,6 +78,7 @@ import { AboutComponent } from './about/about.component';
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule,
+    MatAutocompleteModule,
     MatExpansionModule,
     NgxMaterialTimepickerModule,
     MatDialogModule,

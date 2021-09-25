@@ -54,3 +54,11 @@ p{
     margin:auto;
     margin-bottom: 30px;
 }
+#image{
+    border:1px dashed gray;
+    width:400px;
+    height:200px;
+    object-fit: contain;
+    padding:5px;
+    background-color:rgba(209, 204, 204, 0.363);
+}

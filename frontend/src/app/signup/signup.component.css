@@ -52,11 +52,24 @@
 }
 .uploadImg{
     box-sizing: border-box;
-    background-image: url("/assets/add-image.svg");
+    /* background-image: url("/assets/add-image.svg"); */
     background-size:120% 120%;
     background-position: center;
     overflow: hidden;
     /* border:6px solid red; */
+
+}
+.special{
+    background-color:white;
+ 
+}
+.special:read-only{
+    background-color:white;
+    
+}
+#signUpBtn:disabled{
+    background-color:gray;
+    border:none;
 
 }
 

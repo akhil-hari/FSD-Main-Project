@@ -23,16 +23,35 @@
     
     </div>
 
-    <div style="width:410px;height:463px;margin:30px auto">
-      <app-calender (dateSelectEvent)='select($event)' *ngIf='schedule' [marker]='schedule'></app-calender>
-    </div>
-    <div *ngIf='selectedDate' style="width:60%;margin:auto;height:150px;background-color: aqua;">
-      {{selectedDate.toLocaleDateString()}} 
+    
+    <div style="width:60%;box-sizing: content-box;padding:10px;border-radius: 20px;border: 3px dashed gray;margin:50px auto">
+      <h5 *ngIf='schedule' style="text-align:center;color: gray;margin:10px">Doctor is available on following days</h5>
+      <h3 *ngIf='!schedule'>Doctor doesn't have schedules set  </h3>
+      <div style="width:410px;height:463px;margin:30px auto;">
+        <app-calender (dateSelectEvent)='select($event)' *ngIf='schedule' [marker]='schedule'></app-calender>
+      </div>
+      <div  *ngIf='schedule' style="display:flex;align-items:center;width:60%;margin:auto;height:100px;">
+        <span style="color: cornflowerblue;font-weight: 600;"> Date:</span><span style="margin:10px" *ngIf='selectedDate'>{{selectedDate.toLocaleDateString()}} </span><span *ngIf='!selectedDate'>--/--/----</span>
+        <span  style="color: cornflowerblue;font-weight: 600;margin:10px"> Time:</span>
+       
+        <select [(ngModel)]='selectedSlot' [disabled]='!selectedDate' class="dropdown" name="" id="">
+          <option value="" hidden>Select a slot</option>
+          <option *ngFor="let item of selectedDateSchedule" value="{{item.appointment}}">{{item.start}}-{{item.end}}</option>
+        </select>
+        <br>
+       
+      </div>
+      <div *ngIf='schedule'  style="display:flex;align-items: center;width:60%;margin:auto;">
+       
 
-      <select name="" id="">
-        <option *ngFor="let item of selectedDateSchedule" value="{{item.appointment}}">{{item.start}}-{{item.end}}</option>
-      </select>
+        <button [disabled]="selectedDate==''||selectedSlot==''" (click)='bookAppointment()' class="book-appointment">Book Appointment</button>
+
+      </div>
+      
+
     </div>
+   
+    
 
     
     </div>

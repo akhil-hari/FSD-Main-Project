@@ -1,1 +1,56 @@
-<p>adminhome works!</p>
+<div id='body'>
+    <div class="search-box">
+
+        <input type="text" [(ngModel)]='searchInput' (keyup)='search(searchInput)' placeholder='Search doctors here'>
+        <button (click)='search(searchInput)'>
+            <!-- <i class="fa fa-search" aria-hidden="true"></i> -->
+             Search
+        </button>
+    
+    </div>
+    
+    <div *ngIf='!(searchResult.length==0)' id="list">
+        <table>
+            <tr *ngFor="let result of searchResult" class="item" (click)='forward(result.doctor._id)'>
+
+                    <td>
+
+                        <img [src]='result.doctor.image' class='photo'>
+
+                    </td>
+                    <td>
+
+                        <div class='content'>
+                            <span style='display:flex;flex-direction:row;flex-wrap:wrap;align-items:center'><h2>{{result.doctor.name}}</h2> <h5 style='margin:0px 5px;'>({{result.doctor.speciality}})</h5></span>
+                            <!-- <h2>Doctor  1</h2> -->
+                            <h5>{{result.doctor.currentHospital}}</h5>
+                            <span *ngIf='result.userRatings.hasOwnProperty("avgRating")'>
+
+                                <ratings  [rating]='result.userRatings.avgRating*20' ></ratings> ({{result.userRatings.count}})
+
+                            </span>
+                            
+                        </div>
+
+                    </td>
+                
+
+
+                </tr>
+
+                
+
+        </table>
+        
+       
+
+
+      
+        
+    
+    </div>
+
+</div>
+
+
+

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DoctorService } from '../doctor.service'
+import { NotifictionService} from '../notifiction.service'
 
 @Component({
   selector: 'book-appointment',
@@ -8,10 +9,39 @@ import { DoctorService } from '../doctor.service'
 })
 export class BookAppointmentComponent implements OnInit {
 
-  constructor(private ds:DoctorService) { }
+  constructor(private ds:DoctorService,private ns:NotifictionService) { }
   schedule:any;
   selectedDate:any='';
   selectedDateSchedule:Array<any>=[];
+  selectedSlot:string='';
+  user_id:string="60fd784b02bcac2f325dd57c"
+  doctor:string="60f19de2dff78773927ffafe"
+
+  private twoDigit(n:number):string{
+
+    if(n<10){
+      return('0'+n);
+    }
+    else{
+      return(n.toString());
+    }
+
+
+}
+
+twoDigitTime(n:Date):string{
+  let h=this.twoDigit(n.getHours());
+  let m=this.twoDigit(n.getMinutes());
+  return `${h}:${m}`;
+
+}
+bookAppointment(){
+  this.ds.bookAppointment(this.doctor,this.user_id,new Date(this.selectedSlot)).subscribe(data => {
+    this.ns.notify(data);
+
+  })
+
+}
 
 
   select(event: Date){
@@ -26,7 +56,7 @@ export class BookAppointmentComponent implements OnInit {
         if(el.day==day){
           let sdate=new Date(this.selectedDate.toDateString()+' '+el.schedule.start)
           let edate=new Date(this.selectedDate.toDateString()+' '+el.schedule.end)
-          this.selectedDateSchedule.push({appointment:sdate,start:`${sdate.getHours()}:${sdate.getMinutes()}`,end:`${edate.getHours()}:${edate.getMinutes()}`})
+          this.selectedDateSchedule.push({appointment:sdate,start:`${this.twoDigitTime(sdate)}`,end:`${this.twoDigitTime(edate)}`})
   
         }
   
@@ -39,7 +69,7 @@ export class BookAppointmentComponent implements OnInit {
         if(el.date==date){
           let sdate=new Date(this.selectedDate.toDateString()+' '+el.schedule.start)
           let edate=new Date(this.selectedDate.toDateString()+' '+el.schedule.end)
-          this.selectedDateSchedule.push({appointment:sdate,start:`${sdate.getHours()}:${sdate.getMinutes()}`,end:`${edate.getHours()}:${edate.getMinutes()}`});
+          this.selectedDateSchedule.push({appointment:sdate,start:`${this.twoDigitTime(sdate)}`,end:`${this.twoDigitTime(edate)}`});
   
         }
   
@@ -54,7 +84,7 @@ export class BookAppointmentComponent implements OnInit {
 
         if(sdate.getDay()==day&&sdate.getDate()==date&&sdate.getMonth()==month){
 
-          this.selectedDateSchedule.push({appointment:sdate,start:`${sdate.getHours()}:${sdate.getMinutes()}`,end:`${edate.getHours()}:${edate.getMinutes()}`});
+          this.selectedDateSchedule.push({appointment:sdate,start:`${this.twoDigitTime(sdate)}`,end:`${this.twoDigitTime(edate)}`});
 
 
         }

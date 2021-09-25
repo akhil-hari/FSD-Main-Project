@@ -14,7 +14,8 @@ const {
     setDoctorSchedule,
     getUpcomingVisits,
     userAppointmentConfirm,
-    getCountOfConfirmed
+    getCountOfConfirmed,
+    getVisitsToday
 
  }= require('../controller/doctor');
 
@@ -27,7 +28,9 @@ const {
     getDoctorSchedule,
     getUserSchedule,
     getDoctorName,
-    getUserName
+    getUserName,
+    searchHospital,
+    signUp
  }=require('../controller/general');
 
 const ObjectId=require('mongoose').Types.ObjectId;
@@ -36,6 +39,13 @@ const userSchedule=require('../models/userSchedule');
 
 
 const apiRouter=new express.Router();
+   
+
+   apiRouter.post('/signup',async (req,res)=>{
+      
+      let data=signUp(req.body.data);
+      res.json(await data);
+   })
 
 
 
@@ -75,6 +85,11 @@ const apiRouter=new express.Router();
 
       res.json(await search(query));
    });
+   apiRouter.get('/search_hospital',async (req,res)=>{
+      let query=req.query.q;
+
+      res.json(await searchHospital(query));
+   });
 
    apiRouter.get('/u',async (req,res)=>{
 
@@ -86,7 +101,7 @@ const apiRouter=new express.Router();
    apiRouter.get('/d',async (req,res)=>{
 
       let id=req.query.id;
-      res.json(await getDocterName(id));
+      res.json(await getDoctorName(id));
 
    });
 
@@ -94,13 +109,17 @@ const apiRouter=new express.Router();
    apiRouter.get('/doctor/:id',async (req,res)=>{
       let doctorId=req.params.id;
       let data=await getDoctor(doctorId);
+      
       res.json(data);
    });
    
    
-   apiRouter.get('/hospital/:id',async (req,res)=>{
-      let data=await getHospital(req.params.id);
-      res.json(data);
+   apiRouter.get('/h',async (req,res)=>{
+      // console.log(req.query.id);
+      
+      let data=getHospital(req.query.id);
+
+      res.json(await data);
    });
 
    apiRouter.get('/upcoming_visits',async (req,res)=>{
@@ -212,10 +231,15 @@ apiRouter.get('/confirmed_count',async (req,res)=>{
    let id=req.query.id;
    console.log(id)
       let data=getCountOfConfirmed(schedule,id);
-      console.log({schedule:schedule,confirm:await data});
-      res.json({schedule:schedule,confirm:await data})
+      // console.log({schedule:schedule,count:(await data)[0].count,doc_id:(await data)[0]._id});
+      
+      res.json({schedule:schedule,count:((await data)[0]&&(await data)[0].count),doc_id:((await data)[0]&&(await data)[0]._id)});
 })
 
+apiRouter.get('/visits_today',async (req,res)=>{
+   let data=getVisitsToday(req.query.id);
+   res.json(await data);
+})
 
 apiRouter.get('/user_schedule',async (req,res)=>{
       let item={
@@ -230,9 +254,9 @@ apiRouter.get('/user_schedule',async (req,res)=>{
       await data.save().then(result=>{res.send(`<h1 style="color:cornflowerblue">${result} Created in userSchedules</h1>`)}).catch(err=>{res.send(`<h1 style="color:tomato"> ${err} Failed</h1>`)})
    }); 
    apiRouter.get('/test',async (req,res)=>{
-      let schedule='2021-12-09T12:00:00.000+00:00';
-      let data=getCountOfConfirmed('2021-12-09T12:00:00.000+00:00','60f19de2dff78773927ffafe');
-      res.json({schedule:schedule,count:(await data)[0].count,doc_id:(await data)[0]._id});
+      
+      let data=getVisitsToday('60f19de2dff78773927ffafe');
+      res.json(await data);
       
    });
 

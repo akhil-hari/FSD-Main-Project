@@ -8,6 +8,9 @@ import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './search/search.component';
 import { Page404Component } from './page404/page404.component'
 import { doctorGuard } from './auth.guard';
+import { BookAppointmentComponent } from './book-appointment/book-appointment.component';
+import { DoctorProfileComponent } from './doctorprofile/doctorprofile.component';
+import { UserProfileComponent } from './userprofile/userprofile.component';
 
 
 const routes: Routes = [
@@ -17,6 +20,12 @@ const routes: Routes = [
 {path:'login',component:LoginComponent},
 {path:'',component:HomeComponent},
 {path:'search',component:SearchComponent,canActivate:[doctorGuard]},
+{path:'profile/doctor',component:DoctorProfileComponent},
+{path:'profile/user',component:UserProfileComponent},
+// {path:'login/admin',component:},
+
+{path:'bookappointment/:id',component:BookAppointmentComponent},
+
 {path:'**',component:Page404Component}
 
 

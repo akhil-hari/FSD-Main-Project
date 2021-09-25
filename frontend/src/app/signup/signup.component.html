@@ -5,7 +5,7 @@
     <h3 style="font-weight: bold;">Not a Member?<br>Signup Here</h3>
     <br>
     <div class='uploadImg' style="height:72px;width:72px;border-radius: 50%;margin:30px auto 0px;" (click)='uploadImg()'>
-        <img   style="height:100%;width:100%;border-radius: 50%;object-fit:cover;overflow:hidden;" alt="">
+        <img   [src]="imgUrl||'assets/add-image.svg'" style="height:100%;width:100%;border-radius: 50%;object-fit:cover;overflow:hidden;" alt="">
         <input type="file" #imgInput>
 
     </div>
@@ -24,27 +24,32 @@
     </div>
 
 
-    <form *ngIf="acnt_type=='doc'">
+    <form [formGroup]='doctorForm' *ngIf="acnt_type=='doc'">
             
             
            
         <div class="form-group fieldDiv" style="margin-bottom: 0px;">
         <br>
             <label for="firstName">Full Name</label>
-            <input type="text" class="form-control" id="fullName" placeholder="Full Name" required>
+            <input type="text" class="form-control" formControlName="name" id="fullName" placeholder="Full Name" required>
         </div>
         <div class="form-group fieldDiv" style="margin-bottom: 0px;">
             <label for="speciality">Speciality</label>
-            <input type="text" class="form-control" id="speciality" placeholder="Speciality" required>
+            <input type="text" class="form-control"  formControlName="speciality" id="speciality" placeholder="Speciality" required>
         </div>
         <div class="form-group fieldDiv" style="margin-bottom: 0px;">
             <label for="hospital">Your Current Hospital</label>
-            <input type="text" class="form-control" id="hospital" placeholder="Current Hospital" required>
+            <input type="text" [matAutocomplete]="auto" formControlName="currentHospital" class="form-control" id="hospital" placeholder="Current Hospital" required>
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of options" [value]="option.name">
+                  {{option.name}}
+                </mat-option>
+              </mat-autocomplete>
         </div>
-        <div class="form-group fieldDiv" style="margin-bottom: 0px;">
+        <!-- <div class="form-group fieldDiv" style="margin-bottom: 0px;">
             <label for="age">Age</label>
             <input type="text" class="form-control" id="age" placeholder="Age" required>
-        </div>
+        </div> -->
         <!-- (yearSelected)="chosenYearHandler($event)"
                         
                         [formControl]="date"
@@ -53,7 +58,7 @@
                     <div class="form-group fieldDiv" style="margin-bottom: 0px;">
                         <label for="exp">You Started Prcticing in</label>
                         <span>
-                            <input [value]='expValue||""'   class="form-control" placeholder='date'(click)='dateIpClick()' id=exp readonly required>
+                            <input [value]='expValue||""'   class="form-control special" placeholder='date'(click)='dateIpClick()' id=exp readonly required>
         <input [matDatepicker]="dp" [matDatepickerFilter]="pastFilter" [(ngModel)]="expValue" [ngModelOptions]="{standalone: true}" type="hidden">
         <!-- <mat-datepicker-toggle   matSuffix [for]="dp"></mat-datepicker-toggle> -->
         <mat-datepicker #dp
@@ -71,7 +76,7 @@
                     </div>
 
         <br>
-        <div class="gender form-group">
+        <!-- <div class="gender form-group">
             <label for="sex">Gender</label>
             <select name="sex" id="sex" class="form-control">
                
@@ -81,28 +86,28 @@
                 <option value="other">Other</option>
             </select>
             
-        </div>
+        </div> -->
         </form>
     
         
 
-        <form *ngIf="acnt_type=='nu'">
+        <form [formGroup]='userForm' *ngIf="acnt_type=='nu'" [formGroup]='userForm'>
             
             
            
             <div class="form-group fieldDiv" style="margin-bottom: 0px;">
             <br>
                 <label for="firstName">Full Name</label>
-                <input type="text" class="form-control" id="fullName" placeholder="Full Name" required>
+                <input formControlName="name" type="text" class="form-control" id="fullName" placeholder="Full Name" required>
             </div>
             <div class="form-group fieldDiv" style="margin-bottom: 0px;">
                 <label for="age">Age</label>
-                <input type="number" class="form-control" id="age" min='18' max='120' placeholder="Age" required>
+                <input type="number" formControlName="age" class="form-control" id="age" min='18' max='120' placeholder="Age" required>
             </div>
             <br>
             <div class="gender form-group">
                 <label for="sex">Gender</label>
-                <select name="sex" id="sex"  class="form-control">
+                <select formControlName="sex" name="sex" id="sex"  class="form-control">
                     <option value="" default hidden='hidden'>Choose Your Gender</option>
                     <option value="female">Female</option>
                     <option value="male">Male</option>
@@ -112,34 +117,42 @@
                 
             </div>
             </form>
-        <form action="">
+        <form action="" [formGroup]='commonForm'>
 
-            <div class="form-group fieldDiv" style="margin-bottom: 0px;">
+            <div class="form-group fieldDiv" style="margin-bottom: 0px;" >
                 <label for="phoneNumber">Phone Number</label>
-                <input type="tel" class="form-control" id="phoneNumber" placeholder="Phone Number" required>
+                <input type="tel" class="form-control" id="phoneNumber" placeholder="Phone Number" formControlName='phone'  required>
             </div>
 
 
             <div class="form-group fieldDiv" style="margin-bottom: 0px;">
                 <label for="Email">Email</label>
-                <input type="email" class="form-control" id="Email" placeholder="E-mail" required>
+                <input type="email" class="form-control" id="Email" placeholder="E-mail" formControlName='email' required>
             </div>
             <div class="form-group fieldDiv" style="margin-bottom: 0px;">
-              <label for="passWord">Password</label>
-              <input type="password" class="form-control" id="passWord" placeholder="Password" required>
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="passWord" placeholder="Password" formControlName='password' required>
+              <small style='color:red' *ngIf='(!passwordValid)&&(commonForm.controls.password.dirty||commonForm.controls.password.touched)'>*passwords must be atlest 8 characters long</small>
+              <br>
+                <small>Strong passwords contain special characters,numbers,lowercase letters and uppercase letters.</small>
             </div>
             <div class="form-group fieldDiv">
                 <label for="confirm-password">Confirm Password</label>
-                <input type="password" class="form-control" placeholder="Confirm Password" id="confirm-password" required>
+                <input type="password" class="form-control" placeholder="Confirm Password" id="confirm-password" formControlName='confirmPassword' required>
+                <small style='color:red' *ngIf='(!passwordMatch)&&(commonForm.controls.confirmPassword.dirty||commonForm.controls.confirmPassword.touched)'>*passwords must match</small>
+                
             </div>
-            <br>
-            <div class="form-group form-check">
+           
+            <!-- <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input">
                 <label class="form-check-label">I accept the<a href="#">Terms of Use</a> & <a href="#">Privacy Policy</a></label>
-            </div>
-            <button type="submit" class="btn btn-primary buttonGroup" style="margin-bottom:15px;" id="loginBtn">Sign Up</button>
+            </div> -->
+            <small>*All fields are required.</small>
             <br>
-            <h6>Already have an account? <a href="#" style="color: green;"> Login here</a></h6> 
+            <br>
+            <button type="submit" class="btn btn-primary buttonGroup" (click)='signUp()' [disabled]='((!commonForm.valid)||(acnt_type=="nu"&&(!userForm.valid))||(acnt_type=="doc"&&(!doctorForm.valid)))||!passwordMatch' style="margin-bottom:15px;" id="signUpBtn">Sign Up</button>
+            <br>
+            <h6>Already have an account? <a routerLink='/login' style="color: green;"> Login here</a></h6> 
             
         </form>
         

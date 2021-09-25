@@ -17,7 +17,7 @@ async function getDocument(id,model){
 
 async function userScheduleStatus(id){
     let output;
-    if(await userSchedule.find({user:id,schedule:{$gt:new Date()}}).sort({timestamp:-1}).then(async results=>{
+    if(await userSchedule.find({user:id,status:{$in:['pending', 'rejected','confirmed']},schedule:{$gt:new Date()}}).sort({timestamp:-1}).then(async results=>{
         // console.log('re'+results);
        output=await results.map(async result=>{
             
@@ -125,7 +125,7 @@ async function bookAppointment(doctor,user,schedule){
     let data=userSchedule(item);
 
     if(await data.save().then(result=>{output=result;return true;}).catch()){
-        return output;
+        return {type:'success',msg:'Appointment placed successfully'};
     }
     else{
 

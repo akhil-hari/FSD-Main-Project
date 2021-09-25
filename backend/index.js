@@ -18,6 +18,10 @@ app.use('/api',apiRouter);
 app.use('/admin',adminRouter);
 app.use('/auth',authRouter);
 
+app.get('/*',(req,res)=>{
+	res.send('root dir');
+})
+
  
 
 app.listen(port,()=>{

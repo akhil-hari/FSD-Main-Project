@@ -138,6 +138,7 @@ async function getUpcomingVisits(id){
 
         // ,schedule:new Date(schedule),status:'confirmed'
         if(await data){
+            
             return output;
 
 
@@ -152,59 +153,27 @@ async function getUpcomingVisits(id){
     }
 
 
-    async function getPendingVisits(id){
+    async function getVisitsToday(id){
         let output;
+        let d=new Date();
+        let today= new Date(d.getFullYear(),d.getMonth(),d.getDate());
+        let tomorrow=new Date(today);
+        tomorrow.setDate(today.getDate()+1);
         
     
-        data=userSchedule.find({doctor:id,status:'pending'}).then(r=>{output=r;return true;}).catch(err=>{return false})
-        // .then(results=>{
-           
-        //     let x=results.map(async result=>{
-                
-        //         let user_id=result.user;
-        //         let userdata=getDocument(user_id,userModel);
-        //         let user;
-        //         if(await userdata.then(e=>{user= e;return true;})){
-    
-                    
-               
-        //             // console.log({result,user});
-        //             // console.logr('rtt'+result);
-        //             return {result,user};
-                    
-                    
-    
-        //         }
-                
-                
-                
-        //     });
-        //     if(await Promise.all(x)){
-        //         // console.log(x);
-    
-        //         return await Promise.all(x);
-        //     }
-            
-    
-            
-            
-    
-        // }).catch(err =>{console.log(`${err}`)});
-        // console.log(data);
+        data=userSchedule.find({doctor:id,status:'confirmed',schedule:{$gt:today,$lt:tomorrow}}).then(r=>{output=r;console.log(r);return true;}).catch(err=>{console.log(err);return false})
         
         if(await data){
-            
-            // console.log(data);
             return output;
-           
-           
         }
          else{
-             return {type:'err',msg:"can't fetch pending visits"}
+             return {type:'err',msg:"can't fetch visits today"}
          }
       
         }
-async  function userAppointmentConfirm(id,mode){
+
+
+        async  function userAppointmentConfirm(id,mode){
     
     let output;
     
@@ -228,6 +197,7 @@ module.exports={
     setDoctorSchedule,
     getUpcomingVisits,
     userAppointmentConfirm,
-    getCountOfConfirmed
+    getCountOfConfirmed,
+    getVisitsToday
 
 }

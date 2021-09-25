@@ -1,0 +1,58 @@
+#body
+{    
+    background-image: url("/assets/home-bg.png");
+    /* background-position: center; */
+    box-sizing:border-box;
+    background-size:cover;
+    background-attachment: fixed;
+    /* display: flex; */
+    /* width: 1580px; */
+    width:100%;
+    min-height: 90vh;
+}
+
+.welcome
+{
+    position: relative;
+    top:50px;
+    display: flex;
+    flex-direction: column;
+    background-clip: border-box;
+    border-radius: 20px;
+    /* background-color: rgb(231, 228, 228); */
+    background-color: lightpink;
+    box-shadow: 0 2px 4px 0 rgba(3, 3, 3, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 70px;
+    /* margin-top: 50px; */
+    margin-bottom: 80px;
+    margin-left: 10%;
+    margin-right: 150px;
+    width: 48%;
+    height: fit-content;
+}
+
+h6
+{
+    color: rgb(116, 117, 117);
+    font-family: Verdana;
+    text-align: justify;
+    margin-left: 5px;
+}
+
+.buttonGroup
+{
+    /* background-color: rgb(0, 119, 255); */
+    background-color: green;
+    border-radius: 8rem;
+    padding: 10px;
+    margin-top: 25px;
+    
+}
+
+.create{
+    margin-left: 20px;
+}
+
+.a:hover{
+    color: rgb(0, 89, 255);
+}

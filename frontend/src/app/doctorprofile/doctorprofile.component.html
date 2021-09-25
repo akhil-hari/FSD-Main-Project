@@ -5,11 +5,11 @@
 
     <div style="margin: auto;width:400px;height:300px;">
         <div id="details" >
-            <img src="https://pbs.twimg.com/media/C8LVNcZVYAIBtLc.jpg" class="circle-img" width="150">
+            <img [src]="doctor.image" class="circle-img" width="150">
             <div class="mt-3">
-              <h4>doctor.name</h4>
-              <p class="text-secondary mb-1">doctor.speciality</p>
-              <p class="text-secondary mb-1"><i style='font-size:15px; color: red;' class="fa">&#xf0f8;</i> doctor.currentHospital</p>
+              <h4>{{doctor.name}}</h4>
+              <p class="text-secondary mb-1">{{doctor.speciality}}</p>
+              <p class="text-secondary mb-1"><i style='font-size:15px; color: red;' class="fa">&#xf0f8;</i> {{doctor.currentHospital}}</p>
 
               
               <!-- <p class="text-muted font-size-sm"><i style="font-size:15px; color: red;" class="fa">&#xf041;</i> New Jersey</p> -->
@@ -43,7 +43,7 @@
         <div class="tab-accordian">
 
           <mat-accordion>
-            <mat-expansion-panel #visitsToday>
+            <mat-expansion-panel #visitsOfToday>
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   Visits Today
@@ -52,18 +52,20 @@
                  View visits today
                 </mat-panel-description>
               </mat-expansion-panel-header>
+
+              <span *ngIf='!visitsToday' style="text-align: center;width:100%;color:gray">No Visits Today</span>
               <table>
-                <tr>
+                <tr *ngFor="let visit of visitsToday">
                   <td>
                     <h5 style="color:royalblue">
       
-                      user name 
+                      {{visit.user.name}}
       
                     </h5>
                     
                     
                     <div>
-                      <small>sex: female | age: 40</small>
+                      <small>sex: {{visit.user.sex}} | age: {{visit.user.age}}</small>
                        
       
                     </div>
@@ -78,7 +80,7 @@
                         <h5>
                           <span>
                             <span style="color:royalblue">Appointment:</span>
-                          18:30 
+                            {{twoDigitTime(visit.schedule)}} 
       
                           </span>
                           
@@ -146,7 +148,7 @@
           
                           <div>
           
-                        <small>* 7 people on the same slot</small> 
+                        <small>* {{schedule.count||0}} people on the same slot</small> 
           
                           </div>
           
@@ -157,7 +159,7 @@
                       <span>
         
                         <button class='btn-confirm' (click)='confirmAppointment(schedule.id,"confirmed")'>confirm</button>
-                        <button class='btn-reject'>reject</button>
+                        <button class='btn-reject' (click)='confirmAppointment(schedule.id,"rejected")'>reject</button>
         
                       </span>
                      

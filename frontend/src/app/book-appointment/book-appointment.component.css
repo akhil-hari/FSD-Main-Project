@@ -14,3 +14,40 @@
     height:150px;
     width:150px;
 }
+
+.dropdown{
+    padding:5px;
+    /* color:royalblue; */
+    border:1px solid gray;
+    border-radius: 5px;
+    height: 40px;
+    margin: 5px;
+
+}
+
+.dropdown:focus{
+
+    /* color:#008CBA; */
+
+    outline:2px solid lightseagreen;
+}
+
+.dropdown:invalid {
+    border: 2px solid red;
+  }
+.book-appointment{
+    margin: 10px auto;
+    border-radius: 30px;
+    padding: 10px 20px;
+    color:white;
+    background-color:royalblue;
+    border:none
+}
+
+.book-appointment:hover,.book-appointment:active{
+    background-color:rgb(27, 50, 121);
+
+}
+.book-appointment:disabled{
+    background-color:rgb(56, 53, 53);
+}

@@ -1,0 +1,63 @@
+.search-box{
+    display:flex;
+    flex-direction:row;
+    
+    width:60vw;
+    
+    margin: 20px auto;
+    border:1px solid black;
+    border-radius: 5px;
+    padding:5px;
+    padding-left: 10px;
+}
+.search-box input{
+    width:80%;
+    outline:none;
+    border:none;
+
+}
+.item{
+    padding:10px;
+}
+.search-box button{
+    width:20%;
+    color:white;
+    padding:5px;
+    border-radius: 5px;
+    background-color: royalblue;
+    outline:none;
+    border:none;
+
+}
+
+#body{
+    min-height:90vh;
+    height:fit-content;
+}
+#list{
+    padding:5px;
+    width:80%;
+    margin: 20px auto;
+    height: 80vh;
+    overflow-x: hidden;
+    overflow-y:scroll;
+
+}
+
+.photo{
+    /* border:1px solid black; */
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg');
+    border-radius: 50%;
+    margin:20px;
+    /* background-color: gray; */
+    width:96px;
+    height:96px;
+    margin-right:50px;
+    object-fit: cover;
+    object-position:center;
+}
+.content{
+    /* grid-area:content; */
+    text-align: left;
+    /* margin-left: 100px; */
+}

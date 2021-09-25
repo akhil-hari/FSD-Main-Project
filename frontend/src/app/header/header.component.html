@@ -24,7 +24,7 @@
                     {{capitalize('guest')}}
                     <div style="width:40px;height:40px;border:2px;border-radius:50%;margin-left: 10px;background-color:#262626;">
                     
-                      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg" style='height:100%;width:100%;overflow:hidden;object-fit:cover;background-image: url("/assets/profile.svg");' alt="">
+                      <img [src]="''||'https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg'" style='height:100%;width:100%;overflow:hidden;object-fit:cover;background-image: url("/assets/profile.svg");' alt="">
                     
                     </div>
 
@@ -58,11 +58,11 @@
     <!-- </div> -->
 
 
-    <div *ngIf="nshow" style="padding:5px auto;display:form;flex-direction: row;align-items: center;height:45px;width:100%;color:white;text-align:center;justify-content:center" [ngStyle]='{"background-color":ntype=="success"? "rgba(0, 128, 0, 0.85)":"rgba(128,0,0,0.85)"}' >
+    <div *ngIf="nshow" style="position:fixed;top:100px;padding:5px auto;flex-direction: row;align-items: center;height:45px;width:100%;color:white;text-align:center;justify-content:center" [ngStyle]='{"background-color":ntype=="success"? "rgba(0, 128, 0, 0.85)":"rgba(128,0,0,0.85)"}' >
      <span >
-      <span *ngIf="ntype=='success'" style="font-size:30px;margin-right:10px;margin-left:10px;" >&#10003;</span>
-      <span *ngIf="ntype=='err'" style="font-size:30px;margin-right:10px;margin-left:10px" >&#10007;</span>
-      <span>{{ncontent}}</span>
+      <span *ngIf="ntype=='success'" style="position:relative;top:-30px;font-size:30px;margin-right:10px;margin-left:10px;" >&#10003;</span>
+      <span *ngIf="ntype=='err'" style="position:relative;top:-30px;font-size:30px;margin-right:10px;margin-left:10px" >&#10007;</span>
+      <span style="position:relative;top:-30px;">{{ncontent}}</span>
       
       
      </span> 

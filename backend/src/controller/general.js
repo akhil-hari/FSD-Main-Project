@@ -51,7 +51,7 @@ async function getUserName(id){
 }
 
 async function getDoctorName(id){
-    let data=userModel.findOne({_id:id})
+    let data=doctorModel.findOne({_id:id})
     let output;
     if(await data.then(r=>{output=r;return true}).catch(err=>{return false})){
         return output;
@@ -126,19 +126,39 @@ async function search(query){
 
          return {doctor:item,userRatings:rating[0]||{}};
     })
+
+    async function searchHospital(query){
+
+    }
     
     return await Promise.all(data);
 }
 
-async function add_hospital(){
-    
+async function searchHospital(query){
+    let output;
+    let data=hospitalModel.find({name:{$regex:query,$options:'i'}}).then(r=>{output=r;return r==null?false:true}).catch(err=>{return false});
+    if(await data){
+        return output
+    }
+    else{
+        return [];
+    }
     
     
 }
 async function getHospital(id){
-    data=await hospitalModel.findOne({_id:ObjectId(id)}).catch(err=>{console.log(`${err}: can't get from Hospital data`)})
+    let output;
+    data=hospitalModel.findOne({_id:ObjectId(id)}).then(r=>{output=r ;return r==null?false:true}).catch(err=>{console.log(`${err}: can't get from Hospital data`);return false})
     // console.log(await Promise.all([data]));
-    return (await Promise.all([data]))[0];
+    if(await data){
+        // console.log(output);
+        
+        return output;
+
+    }
+    else{
+        return {type:'err',msg:"can't get  Hospital details"};
+    }
 }
 async function getDoctorSchedule(doctor_id,user_id){
     data=await doctorSchedule.findOne({doctor:ObjectId(doctor_id),user:ObjectId(user_id)}).catch(err=>{console.log(`${err}: can't get from doctorSchedule data`)})
@@ -168,7 +188,7 @@ async function getDoctorSchedule(doctor_id,user_id){
             image:item.image,
 
          }
-         model=doctorModel(input).then(r=>{profile=r._id;return true;}).catch(err=>{return false});
+         model=(doctorModel(input).save()).then(r=>{profile=r._id;return true;}).catch(err=>{return false});
         
      }
      else if (item.role=='user'){
@@ -179,7 +199,7 @@ async function getDoctorSchedule(doctor_id,user_id){
             sex: item.sex,
             image:item.image
         }
-         model=userModel(input).then(r=>{profile=r._id;return true;}).catch(err=>{return false});
+         model=(userModel(input).save()).then(r=>{profile=r._id;return true;}).catch(err=>{return false});
 
      }
 
@@ -224,7 +244,8 @@ module.exports={
     getUserSchedule,
     getDoctorName,
     getUserName,
-    signUp
+    signUp,
+    searchHospital
     // upcomingDoctorSchedule
 
 }

@@ -13,21 +13,19 @@ const {verifyToken}= require('../controller/auth');
 adminRouter.get('/add_hospital',async (req,res)=>{
 
     
-    // item={
-    //  name:'abc Hospital',
-    // type:'Specialized', 
-    // speciality:'Cardio',
-    // hospitalDescription:'Blah blah blah..this hospital is such and such .It has such and such facilities available ...',
-    // //hospitalRecord:[String],
-    // address:{address:'xyz street,def block,ghi area,jkl District ',pin:690567,},
-    // contact:'+914792538756',
-    // position:{
-    //     lon:10.57622,
-    //     lat:52.43778
-    // }
-    // }
+    item={
+     name:req.body.name,
+    type:req.body.type, 
+    speciality:req.body.speciality,
+    hospitalDescription:req.body.description,
+    //hospitalRecord:[String],
+    address:req.body.address,
+    contact:req.body.phone,
+    image:req.body.image
+    }
 
-    // let  data=hospitalModel(item)
+    let  data=addHospital(item)
+    return await data;
     // await data.save().then(result=>{res.send(`<h1 style="color:cornflowerblue">${result} Created in hospital Datas</h1>`)}).catch(err=>{res.send(`<h1 style="color:tomato"> ${err} Failed</h1>`)})
 });
 

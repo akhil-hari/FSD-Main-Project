@@ -20,6 +20,10 @@ export class DoctorService {
     let doctor=this.http.get(this.baseUrl+'api/doctor/'+id_string);
     return doctor;
   }
+  getHospital(id:string){
+    let result=this.http.get(this.baseUrl+'api/h',{params:{id}});
+    return result;
+  }
 
   getUpcomingVisits(id_string:string){
     let upcomingVisits=this.http.get(this.baseUrl+'api/upcoming_visits/',{params:{id:id_string}});
@@ -38,6 +42,11 @@ export class DoctorService {
     return user;
 
   }
+  doctorFromId(id_string:string):any{
+    let doctor=this.http.get(this.baseUrl+'api/d',{params:{id:id_string}})
+    return doctor;
+
+  }
   confirmAppointment(id:string,mode:string){
    let result=this.http.post(this.baseUrl+'api/confirm_appointment',{id,mode})
    return result;
@@ -48,10 +57,32 @@ export class DoctorService {
     return result;
 
   }
+  getVisitsToday(id:string){
+    let result=this.http.get(this.baseUrl+'api/visits_today',{params:{id}});
+    return result;
+    
+
+  }
+bookAppointment(doctor:string,user:string,schedule:Date){
+  let result=this.http.post(this.baseUrl+'api/book_appointment',{user,schedule,doctor})
+  return result;
+}
+getScheduleStatus(id:string){
+  let result=this.http.get(this.baseUrl+'api/schedule_status',{params:{id}});
+  return result;
+
+}
   search(query:string):any{
     let result=this.http.get(this.baseUrl+'api/search',{params:{q:query}})
     return result;
   }
-
+searchHospital(query:string){
+  let result=this.http.get(this.baseUrl+'api/search_hospital',{params:{q:query}});
+  return result;
+}
+signUp(data:any){
+  let result=this.http.post(this.baseUrl+'api/signup',{data});
+  return result;
+}
 
 }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DoctorService } from '../doctor.service';
+
 
 @Component({
   selector: 'app-adminhome',
@@ -7,9 +10,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminhomeComponent implements OnInit {
 
-  constructor() { }
+  searchInput:string='';
 
-  ngOnInit(): void {
+  constructor(private ds:DoctorService,private r:Router) { }
+  searchResult:any=[]
+
+  search(query: string){
+    console.log(this.searchInput);
+
+    this.ds.search(query).subscribe((r:any)=>{
+      this.searchResult=r;
+    })
+
+  }
+  forward(s:string): void {
+    this.r.navigate(['doctor/'+s]);
+    
   }
 
+  ngOnInit(): void {
+    this.search(this.searchInput);
+    
+  }
 }

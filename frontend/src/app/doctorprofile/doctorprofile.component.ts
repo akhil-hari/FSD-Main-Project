@@ -51,7 +51,7 @@ export class DoctorProfileComponent implements OnInit,AfterViewInit {
   @ViewChild('onetimeExp')
   onetimeExp!:MatExpansionPanel;
 
-  @ViewChild('visitsToday')
+  @ViewChild('visitsOfToday')
   visitsTodayExp!: MatExpansionPanel;
 
   @ViewChild('pendingAppointments')
@@ -66,7 +66,9 @@ export class DoctorProfileComponent implements OnInit,AfterViewInit {
   notOnEveryMonth:boolean=false;
   startdate:Date = new Date();
   upcomingVisits:Array<any>=[];
+  visitsToday:Array<any>=[];
   doctor_id:string='60f19de2dff78773927ffafe';
+  doctor:any;
 clickfn():void{
   console.log(this.weeklyForm.value);
 }
@@ -88,7 +90,7 @@ saveBtn(type:string){
           let i=this.schedule.weekly.indexOf(el);
           this.schedule.weekly[i]={day:parseInt(item.day),schedule:{start:this.timeStringGenerator(item.start),end:this.timeStringGenerator(item.end)}};
 
-          this.ds.setDoctorSchedule('60f19de2dff78773927ffafe',this.schedule.weekly,"weekly").subscribe((result:any)=>{
+          this.ds.setDoctorSchedule(this.doctor_id,this.schedule.weekly,"weekly").subscribe((result:any)=>{
             console.log(result);
             this.ngOnInit();
             this.ngAfterViewInit(1);
@@ -337,8 +339,10 @@ confirmAppointment(id:string,mode:string){
 
 
   ngOnInit(): void {
-    // this.ds.setDoctorSchedule('60f19de2dff78773927ffafe',{test1:'blah',test2:'wooo'},"weekly").subscribe();
-    
+    this.ds.doctorFromId(this.doctor_id).subscribe((data:any) =>{
+      this.doctor=data;
+      console.log(this.doctor);
+    })
     this.days=[
       {name:'Sunday',day:0,schedule:{}},
       {name:'Monday',day:1,schedule:{}},
@@ -410,7 +414,7 @@ confirmAppointment(id:string,mode:string){
         this.ds.userFromId(el.user).subscribe((u:any)=>{
           console.log(el.user);
 
-          this.ds.getCountOfConfirmed(el.schedule,el._id).subscribe((count:any)=>{
+          this.ds.getCountOfConfirmed(el.schedule,this.doctor_id).subscribe((count:any)=>{
             if(!(count.type&&count.type=='err')){
               this.upcomingVisits.push({user:u,schedule:new Date(el.schedule),id:el._id,count:count.count});
               console.log(count);
@@ -438,6 +442,22 @@ confirmAppointment(id:string,mode:string){
       console.log(this.upcomingVisits);
     });
 
+    this.ds.getVisitsToday(this.doctor_id).subscribe((data:any)=>{
+      this.visitsToday=[];
+      if(!data.type||data.type!='err'){
+        data.forEach((el:any)=>{
+
+          this.ds.userFromId(el.user).subscribe((u:any)=>{
+            this.visitsToday.push({user:u,schedule:new Date(el.schedule)})
+
+          });
+          console.log()
+
+        })
+
+      }
+
+    })
 
     
 

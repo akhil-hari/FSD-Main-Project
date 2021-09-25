@@ -5,13 +5,13 @@
 
     <div style="margin: auto;width:400px;height:300px;">
         <div id="details" >
-            <img src="https://pbs.twimg.com/media/C8LVNcZVYAIBtLc.jpg" class="circle-img" width="150">
+            <img [src]="user.image" class="circle-img" width="150">
             <div class="mt-3">
-              <h4>user.name</h4>
+              <h4>{{user.name}}</h4>
               <span >
 
-                <p class="text-secondary mb-1">user.age</p>
-                <p class="text-secondary mb-1">user.sex</p>
+                <p class="text-secondary mb-1" style="font-weight: 500;">age: {{user.age}}</p>
+                <p class="text-secondary mb-1" style="font-weight: 500;">sex: {{user.sex}}</p>
                 <!-- <p class="text-secondary mb-1">+91008008008</p> -->
               </span>
               
@@ -34,15 +34,19 @@
         <div style='width: 100%;height:300px;margin:30px;overflow-y: scroll;overflow-x: hidden;'>
 
             <table style="width:100%">
-                <tr>
+                <tr *ngFor="let schedule of scheduleStatus">
                     <td class='royalblue'>
-                        doctor1
+                        {{schedule.doctor}}
                     </td>
                     <td class='royalblue' style='margin:auto'>
-                        18:30 - 1/12/2021
+                        {{twoDigitTime(schedule.schedule)}} - {{schedule.schedule.toLocaleDateString()}}
                     </td>
                     <td>
-                         <span style='font-weight: 700;' [ngClass]="{'orange':status=='pending','red':status=='rejected','green':status=='confirmed'}" > confirmed</span> <button *ngIf='status!="rejected"' class='btn-cancel'>Cancel</button>
+                         <span style='font-weight: 700;' [ngClass]="{'orange':schedule.status=='pending','red':schedule.status=='rejected','green':schedule.status=='confirmed'}" > {{schedule.status}}</span> 
+                    </td>
+                    <td>
+                        <button *ngIf='schedule.status!="rejected"' class='btn-cancel'>Cancel</button>
+
                     </td>
                 </tr>
             </table>
