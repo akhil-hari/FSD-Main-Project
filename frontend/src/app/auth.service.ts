@@ -24,7 +24,7 @@ export class AuthService {
     }
    }
   baseUrl=environment.baseUrl;
-  user:any={profile:'',role:''};
+  private user:any={profile:'',role:''};
   private loggedIn:boolean=false;
   private tokens={accessToken:'',refreshToken:''};
 
@@ -77,11 +77,15 @@ export class AuthService {
     localStorage.removeItem('role');
     localStorage.removeItem('profile');
     this.user={profile:'',role:''};
+    this.authBroadcast.next({user:this.user,result:{}});
 
   }
   isLoggedIn(){
       return this.loggedIn;
 
+  }
+  getUser(){
+    return this.user;
   }
   getAccessToken(){
     if(this.loggedIn){

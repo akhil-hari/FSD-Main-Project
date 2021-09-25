@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { DoctorService } from '../doctor.service';
+import { NotifictionService } from '../notifiction.service';
 
 @Component({
   selector: 'app-userprofile',
@@ -13,7 +14,7 @@ export class UserProfileComponent implements OnInit {
   user:any;
   scheduleStatus:Array<any>=[];
 
-  constructor(private ds:DoctorService,private as:AuthService) { }
+  constructor(private ds:DoctorService,private as:AuthService,private ns:NotifictionService) { }
 
 
   private twoDigit(n:number):string{
@@ -36,7 +37,9 @@ twoDigitTime(n:Date):string{
 }
 
 cancelBtn(id:string){
+  console.log(id)
   this.ds.confirmAppointment(id,'canceled').subscribe(data => {
+    this.ns.notify(data);
     this.ngOnInit();
     
   });
@@ -51,13 +54,15 @@ cancelBtn(id:string){
     })
     this.ds.getScheduleStatus(this.user_id).subscribe((data:any) =>{
       this.scheduleStatus=[];
-      console.log(data);
+      // console.log(data);
       data.forEach((el:any)=>{
+        // console.log(el);
         
-          this.scheduleStatus.push({doctor:el.doctor.name,status:el.schedule.status,schedule:new Date(el.schedule.schedule),id:el.schedule.id});
+          this.scheduleStatus.push({doctor:el.doctor.name,status:el.schedule.status,schedule:new Date(el.schedule.schedule),id:el.schedule._id});
+          // console.log(el.schedule.id);
         
       })
-      console.log(this.scheduleStatus);
+      // console.log(this.scheduleStatus);
     })
   }
 

@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
       else{
         this.loginMsg='';
         this.router.navigate(['/']);
-        console.log(this.as.user);
+       
       }
      
     })

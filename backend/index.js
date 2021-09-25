@@ -5,7 +5,7 @@ const path=require('path');
 const  apiRouter=require('./src/routes/api');
 const adminRouter=require('./src/routes/admin');
 const authRouter=require('./src/routes/auth');
-let port=8080;
+let port=process.env.port||8080;
 
 app.set('view engine','ejs')
 app.use(cors());

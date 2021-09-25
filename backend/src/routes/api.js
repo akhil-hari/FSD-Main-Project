@@ -134,17 +134,7 @@ const apiRouter=new express.Router();
    });
 
 
-   apiRouter.get('/add_user',async (req,res)=>{
-      let item={
-         name: 'User3',
-         age: 38,
-         phone: '+919573894120',
-      }
-      let  data=userModel(item)
-      await data.save().then(result=>{res.send(`<h1 style="color:cornflowerblue">${result} Created in userdatas</h1>`)}).catch(err=>{res.send(`<h1 style="color:tomato"> ${err} Failed</h1>`)})
-
-
-   });
+  
 
    apiRouter.get('/add_rating',async (req,res)=>{
       item={
@@ -196,7 +186,7 @@ apiRouter.post('/set_schedule',async (req,res)=>{
 
 apiRouter.post('/confirm_appointment',async (req,res)=>{
    let id=req.body.id;
-   console.log(req.headers);
+   // console.log(req.headers);
    let mode=req.body.mode;
    data=await userAppointmentConfirm(id,mode);
       res.json(data);

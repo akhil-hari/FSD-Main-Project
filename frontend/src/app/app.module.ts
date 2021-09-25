@@ -40,6 +40,7 @@ import { AddHospitalComponent } from './add-hospital/add-hospital.component';
 import { AddAdminComponent } from './add-admin/add-admin.component';
 import { AboutComponent } from './about/about.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { LogoutComponent } from './logout/logout.component';
 
 
 
@@ -67,6 +68,7 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
          AddAdminComponent,
          AboutComponent,
          AdminLoginComponent,
+         LogoutComponent,
   ],
   imports: [
     BrowserModule,

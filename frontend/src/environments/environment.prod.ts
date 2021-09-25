@@ -10,5 +10,6 @@ export const environment = {
     appId: "1:205663210807:web:08936a18f5dcdb4e8e1eb2",
     measurementId: "G-3V85JEJFJ5"
 
-  }
+  },
+  baseUrl:"https://fsd-main.herokuapp.com/"
 };

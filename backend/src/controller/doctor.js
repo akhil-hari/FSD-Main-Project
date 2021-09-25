@@ -173,14 +173,16 @@ async function getUpcomingVisits(id){
         }
 
 
-        async  function userAppointmentConfirm(id,mode){
+    async  function userAppointmentConfirm(id,mode){
     
     let output;
+
     
     
-    if(await userSchedule.findOneAndUpdate({_id:id,status:'pending'},{$set:{status:mode}},{upsert:false,new:true}).then(e=>{output=e;return true;}).catch()){
-        
-        return output;
+    if(await userSchedule.findOneAndUpdate({_id:id,status:{$in:['pending','confirmed']}},{$set:{status:mode}},{upsert:false,new:true}).then(e=>{output=e;return e==null?false:true;}).catch(err=>{console.log(err);return false})){
+        console.log('op:'+output);
+        return {type:'success',msg:'Appointment '+ mode}
+        // return output;
     }
     else{
     
