@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 import { DoctorService } from '../doctor.service'
 import { NotifictionService} from '../notifiction.service'
 
@@ -9,14 +11,14 @@ import { NotifictionService} from '../notifiction.service'
 })
 export class BookAppointmentComponent implements OnInit {
 
-  constructor(private ds:DoctorService,private ns:NotifictionService) { }
+  constructor(private ds:DoctorService,private ns:NotifictionService,private route: ActivatedRoute,private as:AuthService,private router: Router) { }
   schedule:any;
   selectedDate:any='';
   selectedDateSchedule:Array<any>=[];
   selectedSlot:string='';
   user_id:string="60fd784b02bcac2f325dd57c"
-  doctor:string="60f19de2dff78773927ffafe"
-
+  doctor:string=""
+  doctorProfile:any={};
   private twoDigit(n:number):string{
 
     if(n<10){
@@ -104,7 +106,27 @@ bookAppointment(){
 
 
   ngOnInit(): void {
-    this.ds.getDoctorAvailable('60f19de2dff78773927ffafe').subscribe(result=>{
+    this.doctor=this.route.snapshot.paramMap.get('id')||'';
+    if(!this.doctor) this.router.navigate(['/404']);
+    this.ds.doctorFromId(this.doctor).subscribe((data:any) =>{
+      if(!data)  this.router.navigate(['/404']);
+      this.doctorProfile=data;
+      console.log(this.doctorProfile);
+    })
+    if(this.as.isLoggedIn()){
+      let u=this.as.getUser();
+      if(u.role=='user'){
+        this.user_id=u.profile;
+  
+      }
+    }
+
+    else{
+      this.router.navigate(['/login']);
+
+    }
+
+    this.ds.getDoctorAvailable(this.doctor).subscribe(result=>{
       this.schedule=result;
       
     })

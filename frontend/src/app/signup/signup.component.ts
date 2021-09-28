@@ -1,7 +1,7 @@
-import { ConditionalExpr } from '@angular/compiler';
+
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl,ValidationErrors, ValidatorFn} from '@angular/forms';
-import {MatDatepicker} from '@angular/material/datepicker';
+import {MatCalendar, MatCalendarView, MatDatepicker} from '@angular/material/datepicker';
 import { DoctorService } from '../doctor.service';
 import {FirebaseUploadService} from '../firebase-upload.service'
 import { NotifictionService } from '../notifiction.service';
@@ -66,6 +66,7 @@ options:Array<any>=[];
   chosenYearHandler(year:Date){
     // console.log(year);
     this.date.year=year.getFullYear();
+    console.log(this.date.year);
 
     
 
@@ -77,6 +78,15 @@ options:Array<any>=[];
     console.log(this.experience);
     datepicker.close();
 
+  }
+
+  dateViewChange(v:MatCalendarView,datepicker:MatDatepicker<Date>){
+    console.log(v);
+    if(v=='month') {
+    // datepicker._monthSelectedInYearView(new Date);
+    datepicker.close();
+ 
+    }
   }
 
   pastFilter = (d: Date|null): boolean => {
@@ -143,10 +153,7 @@ options:Array<any>=[];
 
   }
    signUp(){
-     console.log('poo')
-     console.log(this.commonForm.valid);
-     console.log(this.doctorForm.valid);
-     console.log(this.userForm.valid);
+     
      let cform=this.commonForm.value;
      let data;
      if(this.acnt_type=='doc'){

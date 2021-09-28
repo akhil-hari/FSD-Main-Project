@@ -63,6 +63,10 @@ export class DoctorService {
     
 
   }
+setReview(doctor:string,user:string,rating:number,review:string){
+  let result=this.http.post(this.baseUrl+'api/set_userrating',{doctor,user,rating,review})
+  return result;
+}
 bookAppointment(doctor:string,user:string,schedule:Date){
   let result=this.http.post(this.baseUrl+'api/book_appointment',{user,schedule,doctor})
   return result;

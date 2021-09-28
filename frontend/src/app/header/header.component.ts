@@ -19,10 +19,7 @@ export class HeaderComponent implements OnInit {
   profile:any={name:''};
   links:Array<any>=[];
 
-  searchResult():void{
-    // console.log('keyup');
-    this.ns.notify({msg:'p123rtv agajh hs hello kelly!',type:'err'});
-  }
+  
   ngOnInit(): void {
     this.user=this.as.getUser();
     console.log(this.user);
@@ -34,8 +31,9 @@ export class HeaderComponent implements OnInit {
       this.ds.doctorFromId(this.user.profile).subscribe((data:any) => {
         this.profile=data;
         this.links=[
-          {name:'Search',link:'/search'},
           {name:'Home',link:'/'},
+          {name:'Search',link:'/search'},
+      
           {name:'Profile',link:'/profile/doctor'},
           {name:'LogOut',link:'logout'}
       ]
@@ -50,8 +48,9 @@ export class HeaderComponent implements OnInit {
       this.ds.userFromId(this.user.profile).subscribe((data:any) => {
         this.profile=data;
         this.links=[
-          {name:'Search',link:'/search'},
           {name:'Home',link:'/'},
+          {name:'Search',link:'/search'},
+          
           {name:'Profile',link:'/profile/user'},
           {name:'LogOut',link:'logout'}
       ]
@@ -61,9 +60,11 @@ export class HeaderComponent implements OnInit {
       
     }
     else if(!this.as.isLoggedIn()){
+      this.profile={name:''};
       this.links=[
-        {name:'Search',link:'/search'},
         {name:'Home',link:'/'},
+        {name:'Search',link:'/search'},
+      
         {name:'LogIn',link:'/login'},
         {name:'SignUp',link:'/signup'},
     ]
@@ -73,21 +74,7 @@ export class HeaderComponent implements OnInit {
     
     this.as.authBroadcast.subscribe({
       next:(u)=>{
-        this.user=u.user;
-        if(this.user.role||this.user.role=='admin'){
-      
-
-        }
-        else if(this.user.role||this.user.role=='doctor'){
-          this.ds.doctorFromId(this.user.profile);
-          
-    
-        }
-        else if(this.user.role||this.user.role=='user'){
-          this.ds.userFromId(this.user.profile);
-    
-        }
-        
+        this.ngOnInit();
 
       }
     })

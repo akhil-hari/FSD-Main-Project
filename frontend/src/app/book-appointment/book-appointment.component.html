@@ -5,11 +5,11 @@
 
     <div style="margin: auto;width:400px;height:300px;">
         <div id="details" >
-            <img src="https://pbs.twimg.com/media/C8LVNcZVYAIBtLc.jpg" class="circle-img" width="150">
+            <img [src]="doctorProfile.image||'assets/profile.svg'" class="circle-img" width="150">
             <div class="mt-3">
-              <h4>doctor.name</h4>
-              <p class="text-secondary mb-1">doctor.speciality</p>
-              <p class="text-secondary mb-1"><i style='font-size:15px; color: red;' class="fa">&#xf0f8;</i> doctor.currentHospital</p>
+              <h4>{{doctorProfile.name}}</h4>
+              <p class="text-secondary mb-1">{{doctorProfile.speciality}}</p>
+              <p class="text-secondary mb-1"><i style='font-size:15px; color: red;' class="fa">&#xf0f8;</i> {{doctorProfile.currentHospital}}</p>
 
               
               <!-- <p class="text-muted font-size-sm"><i style="font-size:15px; color: red;" class="fa">&#xf041;</i> New Jersey</p> -->

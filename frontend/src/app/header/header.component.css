@@ -109,3 +109,8 @@
 #search button:active{
     background-color:rgb(38, 23, 53);
 }
+.round-img{
+    border-radius: 50%;
+    object-position:center;
+    object-fit: cover;
+}

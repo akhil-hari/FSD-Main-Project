@@ -23,6 +23,7 @@ export class HospitalComponent implements OnInit {
     this.ds.getHospital(this.hospital_id).subscribe( (data:any)=>{
      
       if(data.type!='err'){
+        console.log(data);
         this.hospital=data;
         
 

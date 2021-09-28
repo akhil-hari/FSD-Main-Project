@@ -45,7 +45,8 @@ export class LoginComponent implements OnInit {
       }
       else{
         this.loginMsg='';
-        this.router.navigate(['/']);
+        // this.router.navigate(['/']);
+        this.loginAction();
        
       }
      
@@ -55,7 +56,26 @@ export class LoginComponent implements OnInit {
     // console.log(this.loginForm);
 
   }
+private loginAction(){
+  if(this.as.isLoggedIn()){
+    let u=this.as.getUser();
+    if(u.role=='user'){
+      this.router.navigate(['/profile/user']);
+    }
+    else if (u.role=='doctor'){
+      this.router.navigate(['/profile/doctor']);
+
+    }
+    else if(u.role=='admin'){
+
+    }
+  }
+
+}
+  
   ngOnInit(): void {
+    this.loginAction();
+
   }
 
 }

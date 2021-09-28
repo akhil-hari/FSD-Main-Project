@@ -9,8 +9,8 @@ const { createAuth }=require('../controller/auth');
 
 
 async function getDoctor(id){
-    let doctor= await doctorModel.findOne({_id:id}).catch((err)=>{console.log(`${err}:Database Connection Failed while listing doctors.!!`)});
-    let userRating=await ratingModel.aggregate([
+    let doctor= doctorModel.findOne({_id:id}).catch((err)=>{console.log(`${err}:Database Connection Failed while listing doctors.!!`)});
+    let userRating=ratingModel.aggregate([
             
         {
             $match:{doctor:ObjectId(id)}
@@ -30,7 +30,7 @@ async function getDoctor(id){
 ]).catch(err=>{console.log(`${err}: aggregation failed`)})
 //console.log(userRating)    
 
-     let data=await {doctor:doctor,userRatings:userRating[0]};
+     let data={doctor:(await doctor),userRatings:(await userRating)[0]};
      
     
     // console.log(data);
@@ -53,7 +53,7 @@ async function getUserName(id){
 async function getDoctorName(id){
     let data=doctorModel.findOne({_id:id})
     let output;
-    if(await data.then(r=>{output=r;return true}).catch(err=>{return false})){
+    if(await data.then(r=>{output=r;return r==null?false:true}).catch(err=>{return false})){
         return output;
     }
     else{

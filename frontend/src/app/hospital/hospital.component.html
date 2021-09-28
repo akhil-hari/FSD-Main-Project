@@ -4,7 +4,7 @@
 
 <div id="main">
     <div id="panel">
-        <img id='image' [src]="''||'assets/building.svg'" alt="" srcset="">
+        <img id='image' [src]="hospital.image||'assets/building.svg'" alt="" srcset="">
 
         <div id="middle">
             <table>
@@ -21,7 +21,7 @@
                 <tr>
                     <td>Address</td>
                     <td>:</td>
-                    <td>{{hospital.address.address}}</td>
+                    <td>{{hospital.address}}</td>
                 </tr>
                 <tr>
                     <td>Contact</td>
@@ -40,6 +40,6 @@
 
 
 
-<p>
+<p style="line-height:25px;text-align: justify;letter-spacing: 1px;">
 {{hospital.hospitalDescription}}
 </p>

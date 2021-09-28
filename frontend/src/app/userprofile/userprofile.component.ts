@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { DoctorService } from '../doctor.service';
 import { NotifictionService } from '../notifiction.service';
@@ -10,11 +11,11 @@ import { NotifictionService } from '../notifiction.service';
 })
 export class UserProfileComponent implements OnInit {
   status:string='rejected';
-  user_id:string='60fd784b02bcac2f325dd57c';
+  user_id:string='';
   user:any;
   scheduleStatus:Array<any>=[];
 
-  constructor(private ds:DoctorService,private as:AuthService,private ns:NotifictionService) { }
+  constructor(private ds:DoctorService,private as:AuthService,private ns:NotifictionService,private router:Router) { }
 
 
   private twoDigit(n:number):string{
@@ -48,10 +49,21 @@ cancelBtn(id:string){
 
 
   ngOnInit(): void {
-    this.ds.userFromId(this.user_id).subscribe((data:any) =>{
-      this.user=data;
+    if(this.as.isLoggedIn()){
+      let u=this.as.getUser();
+      if(u.role=='user'){
+        this.user_id=u.profile;
+        this.ds.userFromId(this.user_id).subscribe((data:any) =>{
+          this.user=data;
+    
+        })
+      }
+    }
+    else{
+      this.router.navigate(['/login']);
 
-    })
+    }
+   
     this.ds.getScheduleStatus(this.user_id).subscribe((data:any) =>{
       this.scheduleStatus=[];
       // console.log(data);

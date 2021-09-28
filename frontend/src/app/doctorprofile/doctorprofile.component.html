@@ -53,8 +53,9 @@
                 </mat-panel-description>
               </mat-expansion-panel-header>
 
-              <span *ngIf='!visitsToday' style="text-align: center;width:100%;color:gray">No Visits Today</span>
+              <h6 *ngIf='visitsToday.length==0' style="text-align: center;width:100%;color:gray;margin: 30px auto;">No Visits Today</h6>
               <table>
+
                 <tr *ngFor="let visit of visitsToday">
                   <td>
                     <h5 style="color:royalblue">
@@ -113,7 +114,10 @@
                     Confirm/Reject pending appointments
                   </mat-panel-description>
                 </mat-expansion-panel-header>
+                <h6 *ngIf='upcomingVisits.length==0' style="text-align: center;width:100%;color:gray;margin: 30px auto;">No  Pending Appointments</h6>
+      
                 <table>
+                  
                   <tr *ngFor='let schedule of upcomingVisits'>
                     <td>
                       <h5 style="color:royalblue">

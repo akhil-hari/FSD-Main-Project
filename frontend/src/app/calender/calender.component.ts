@@ -42,7 +42,12 @@ export class CalenderComponent implements OnInit {
           for(let j=0;j<5;j++){
             
 
-            if(this.yearGrid.year>this.datetoday.getFullYear()||i>this.datetoday.getMonth()||j>Math.floor( v/7)||el.day>this.datetoday.getDay()){
+            if(this.yearGrid.year>this.datetoday.getFullYear()||i>this.datetoday.getMonth()||j>Math.floor( v/7)||(j==Math.floor(v/7)&&el.day>this.datetoday.getDay())){
+              if(i==this.datetoday.getMonth()){
+                console.log(j);
+                console.log(Math.floor( v/7));
+                console.log(el.day);
+              }
               this.yearGrid.yearGrid[i].grid[j][el.day].marked=true;
               
             }

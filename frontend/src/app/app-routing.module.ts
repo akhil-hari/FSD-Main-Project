@@ -7,7 +7,7 @@ import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './search/search.component';
 import { Page404Component } from './page404/page404.component'
-import { doctorGuard,userGuard,adminGuard } from './auth.guard';
+import { commonGuard,doctorGuard,userGuard,adminGuard } from './auth.guard';
 import { BookAppointmentComponent } from './book-appointment/book-appointment.component';
 import { DoctorProfileComponent } from './doctorprofile/doctorprofile.component';
 import { UserProfileComponent } from './userprofile/userprofile.component';
@@ -15,8 +15,8 @@ import { LogoutComponent } from './logout/logout.component';
 
 
 const routes: Routes = [
-{path:'doctor/:id',component:DoctorComponent},
-{path:'hospital/:id',component:HospitalComponent},
+{path:'doctor/:id',component:DoctorComponent,canActivate:[commonGuard]},
+{path:'hospital/:id',component:HospitalComponent,canActivate:[commonGuard]},
 {path:'signup',component:SignupComponent},
 {path:'login',component:LoginComponent},
 {path:'',component:HomeComponent},
@@ -37,7 +37,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{scrollPositionRestoration:'enabled'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

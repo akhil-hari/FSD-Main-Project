@@ -56,19 +56,21 @@
                     
                     -->
                     <div class="form-group fieldDiv" style="margin-bottom: 0px;">
-                        <label for="exp">You Started Prcticing in</label>
+                        <label for="exp">You Started Practicing  in</label>
                         <span>
-                            <input [value]='expValue||""'   class="form-control special" placeholder='date'(click)='dateIpClick()' id=exp readonly required>
+                            <input [value]='expValue||""'   class="form-control special" placeholder='Your Experience'(click)='dateIpClick()' id=exp readonly required>
         <input [matDatepicker]="dp" [matDatepickerFilter]="pastFilter" [(ngModel)]="expValue" [ngModelOptions]="{standalone: true}" type="hidden">
         <!-- <mat-datepicker-toggle   matSuffix [for]="dp"></mat-datepicker-toggle> -->
         <mat-datepicker #dp
                         startView="multi-year"
                         (yearSelected)="chosenYearHandler($event)"
                         (monthSelected)="chosenMonthHandler($event, dp)"
+                        (viewChanged)="dateViewChange($event,dp)"
 
                         touchUi
                         
                         panelClass="example-month-picker">
+                   
         </mat-datepicker>
 
                         </span>
@@ -128,6 +130,7 @@
             <div class="form-group fieldDiv" style="margin-bottom: 0px;">
                 <label for="Email">Email</label>
                 <input type="email" class="form-control" id="Email" placeholder="E-mail" formControlName='email' required>
+                <small style='color:red' *ngIf='commonForm.controls.email.invalid&&(commonForm.controls.email.dirty||commonForm.controls.email.touched)'>*this is  not a valid email</small>
             </div>
             <div class="form-group fieldDiv" style="margin-bottom: 0px;">
               <label for="password">Password</label>

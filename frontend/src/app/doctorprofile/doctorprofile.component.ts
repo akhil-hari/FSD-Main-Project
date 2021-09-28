@@ -2,6 +2,10 @@ import { Component, OnInit,ViewChild,AfterViewInit } from '@angular/core';
 import { DoctorService } from '../doctor.service';
 import { FormControl,FormGroup,Validators,AbstractControl,ValidationErrors } from '@angular/forms';
 import {MatExpansionPanel} from '@angular/material/expansion';
+import { AuthService } from '../auth.service';
+
+import { Router } from '@angular/router';
+import { NotifictionService } from '../notifiction.service';
 
 
 
@@ -14,8 +18,8 @@ import {MatExpansionPanel} from '@angular/material/expansion';
 })
 export class DoctorProfileComponent implements OnInit,AfterViewInit {
 
-  constructor(private ds:DoctorService) { }
-  schedule:any;
+  constructor(private ds:DoctorService,private as:AuthService,private router:Router,private ns:NotifictionService) { }
+  schedule:any={weekly:[],monthly:[],onetime:[]};
   
   tab:string='visitInfo';
 
@@ -67,7 +71,14 @@ export class DoctorProfileComponent implements OnInit,AfterViewInit {
   startdate:Date = new Date();
   upcomingVisits:Array<any>=[];
   visitsToday:Array<any>=[];
-  doctor_id:string='60f19de2dff78773927ffafe';
+  doctor_id:string='';
+
+
+
+
+
+
+
   doctor:any;
 clickfn():void{
   console.log(this.weeklyForm.value);
@@ -84,7 +95,7 @@ saveBtn(type:string){
 
   if(type=='weekly'){
     let item=this.weeklyForm.value;
-    console.log(item);
+    // console.log(item);
     let s=this.schedule.weekly.find((el:any)=>{
         if(el.day==item.day){
           let i=this.schedule.weekly.indexOf(el);
@@ -325,12 +336,14 @@ confirmAppointment(id:string,mode:string){
   console.log(id)
 
   this.ds.confirmAppointment(id,mode).subscribe((data:any) =>{
-    if(!data.type){
+    if(data.type&&data.type=='success'){
       console.log(data);
+      
       this.ngOnInit();
       this.ngAfterViewInit(4);
 
     }
+    this.ns.notify(data);
   })
 
 
@@ -339,6 +352,18 @@ confirmAppointment(id:string,mode:string){
 
 
   ngOnInit(): void {
+    if(this.as.isLoggedIn()){
+      let u=this.as.getUser();
+      if(u.role=='doctor'){
+        this.doctor_id=u.profile;
+      }
+    }
+    else{
+      this.router.navigate(['/login']);
+
+    }
+
+
     this.ds.doctorFromId(this.doctor_id).subscribe((data:any) =>{
       this.doctor=data;
       console.log(this.doctor);
@@ -354,7 +379,9 @@ confirmAppointment(id:string,mode:string){
     ];
    
     this.ds.getDoctorAvailable(this.doctor_id).subscribe(result=>{
-        this.schedule=result;
+      this.schedule=result;
+      // console.log('result');
+      // console.log(this.schedule);
         if(this.schedule.hasOwnProperty('weekly')){
           this.schedule.weekly.forEach((el:any)=>{
             this.days[el.day].schedule={start:`${this.twoDigit(this.dateFromTimeString(el.schedule.start).getHours())}:${this.twoDigit(this.dateFromTimeString(el.schedule.start).getMinutes())}`,
@@ -365,6 +392,9 @@ confirmAppointment(id:string,mode:string){
           }
 
           )
+        }
+        else{
+          this.schedule['weekly']=[];
         }
 
 
@@ -385,6 +415,9 @@ confirmAppointment(id:string,mode:string){
 
 
         }
+        else{
+          this.schedule['monthly']=[];
+        }
 
         if(this.schedule.hasOwnProperty('onetime')){
           this.onetime=[];
@@ -401,6 +434,9 @@ confirmAppointment(id:string,mode:string){
 
 
 
+        }
+        else{
+          this.schedule['onetime']=[];
         }
       
     });

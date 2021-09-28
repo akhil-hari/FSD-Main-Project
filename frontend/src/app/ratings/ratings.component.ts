@@ -40,11 +40,12 @@ export class RatingsComponent implements OnInit {
   }
   rateConfirm():any{
     this.tempRating=this.rating;
-    console.log(this.round(this.tempRating/1.1));
+    // console.log(this.round(this.tempRating/1.1));
     this.outputRating.emit(this.round(this.tempRating/1.1))
   }
 
   ngOnInit(): void {
+    // console.log(this.inputRating)
     
       this.rating=this.inputRating*1.1;
       // this.rating=10;

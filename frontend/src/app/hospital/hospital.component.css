@@ -22,7 +22,7 @@ h1{
     padding:5px;
     flex-direction:horizontal;
     margin: auto;
-    width:80%;
+    width:60%;
     border-radius:20px;
     margin-top: 30px;
     margin-bottom: 30px;
@@ -32,6 +32,7 @@ h1{
     /* border-left: 1px solid rgba(255, 255, 255, 0.341); */
     /* border-right: 1px solid rgba(255, 255, 255, 0.341); */
     border-radius:20px;
+    width:500px;
     background-color:#262626;
     margin-left: 10px;
     margin-right: 10px;
@@ -42,6 +43,8 @@ h1{
 }
 #panel img{
     width:40%;
+    object-fit: cover;
+    object-position:center;
     /* margin-right: 15px; */
     /* margin-left: 15px; */
 

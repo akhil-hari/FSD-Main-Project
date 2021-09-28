@@ -46,7 +46,7 @@ export class AuthService {
     let output=500;
     this.authBroadcast.next({user:this.user,result:output});
     this.http.post(this.baseUrl+'auth/login',item).subscribe((data:any)=>{
-      console.log('poo');
+      // console.log('poo');
       if(data){
 
         this.setAuth(data);
@@ -54,6 +54,7 @@ export class AuthService {
         output=202;
         this.authBroadcast.next({user:this.user,result:output});
         // console.log(output);
+      
       }
       
       
@@ -78,6 +79,7 @@ export class AuthService {
     localStorage.removeItem('profile');
     this.user={profile:'',role:''};
     this.authBroadcast.next({user:this.user,result:{}});
+    
 
   }
   isLoggedIn(){

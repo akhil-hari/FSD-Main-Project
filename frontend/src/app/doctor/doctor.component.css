@@ -115,6 +115,15 @@
     color:white;
 
 }
+.btn-save:disabled{
+    background-color:gray;
+ 
+}
+.btn-save:disabled:hover,.btn-save:disabled:active{
+    background-color:gray;
+
+
+}
 .btn-cancel{
     background-color:red;
     margin:5px 10px;
@@ -143,6 +152,9 @@
     height:300px;
     overflow-x: hidden;
     overflow-y: scroll;
+    background-color: #b6d2f17e;
+    border-radius: 20px;
+    padding:10px;
 }
 
 #reviews-list td{
@@ -170,5 +182,16 @@
     object-position: center;
     background-image: url('/assets/profile.svg');
 
+}
+.ba-btn:disabled,.ba-btn:disabled:hover,.ba-btn:disabled:active{
+    background-color:gray;
+    color:white;
+
+}
+.logout{
+    color:royalblue;
+}
+.logout:hover{
+    text-decoration:underline;
 }
 
